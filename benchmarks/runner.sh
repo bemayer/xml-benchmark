@@ -9,25 +9,35 @@ INPUT_FILE="$3"
 ITERATIONS="$4"
 OUTPUT_DIR="$5"
 
-LIBRARY_NAME=$(basename "$(dirname "$BENCH_CMD")" 2>/dev/null || basename "$BENCH_CMD")
-
-# Use GNU time to capture memory/CPU
-TIME_OUTPUT=$(mktemp)
 BENCH_OUTPUT=$(mktemp)
+TIME_OUTPUT=$(mktemp)
 
-/usr/bin/time -v -o "$TIME_OUTPUT" \
-  "$BENCH_CMD" "$OPERATION" "$INPUT_FILE" "$ITERATIONS" > "$BENCH_OUTPUT" 2>/dev/null || true
+# Single run: /usr/bin/time for RSS, bash time builtin for precise CPU
+# We use both: GNU time captures RSS, and we wrap with bash time for ms-precision CPU
+/usr/bin/time -v -o "$TIME_OUTPUT" bash -c '
+  TIMEFORMAT="%3U %3S"
+  CPU=$( { time "$1" "$2" "$3" "$4" > "$5" 2>/dev/null ; } 2>&1 ) || true
+  echo "$CPU" > "$5.cpu"
+' _ "$BENCH_CMD" "$OPERATION" "$INPUT_FILE" "$ITERATIONS" "$BENCH_OUTPUT" 2>/dev/null || true
 
-# Parse /usr/bin/time output
-WALL_SEC=$(grep "Elapsed (wall clock)" "$TIME_OUTPUT" | sed -E 's/.*: (.*)/\1/')
+# Parse bash time output (user sys in seconds, 3 decimal places)
+if [ -f "$BENCH_OUTPUT.cpu" ]; then
+  USER_SEC=$(awk '{print $1}' "$BENCH_OUTPUT.cpu")
+  SYS_SEC=$(awk '{print $2}' "$BENCH_OUTPUT.cpu")
+  rm -f "$BENCH_OUTPUT.cpu"
+else
+  # Fallback to GNU time (less precise)
+  USER_SEC=$(grep "User time" "$TIME_OUTPUT" | awk '{print $NF}')
+  SYS_SEC=$(grep "System time" "$TIME_OUTPUT" | awk '{print $NF}')
+fi
+
+# RSS from GNU time
 RSS_KB=$(grep "Maximum resident set size" "$TIME_OUTPUT" | awk '{print $NF}')
-USER_SEC=$(grep "User time" "$TIME_OUTPUT" | awk '{print $NF}')
-SYS_SEC=$(grep "System time" "$TIME_OUTPUT" | awk '{print $NF}')
 
-# Convert to ms
-RSS_MB=$(echo "scale=1; $RSS_KB / 1024" | bc)
-USER_MS=$(echo "scale=3; $USER_SEC * 1000" | bc)
-SYS_MS=$(echo "scale=3; $SYS_SEC * 1000" | bc)
+# Convert
+RSS_MB=$(echo "scale=1; ${RSS_KB:-0} / 1024" | bc)
+USER_MS=$(echo "scale=3; ${USER_SEC:-0} * 1000" | bc)
+SYS_MS=$(echo "scale=3; ${SYS_SEC:-0} * 1000" | bc)
 FILE_SIZE=$(stat -c%s "$INPUT_FILE" 2>/dev/null || stat -f%z "$INPUT_FILE")
 
 # Read the benchmark's JSON output line and enrich it
