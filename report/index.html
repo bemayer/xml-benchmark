@@ -495,7 +495,7 @@
     <div class="section-header">
       <span class="section-number">01</span>
       <h2>FASTEST OVERALL</h2>
-      <span class="section-tag">DOM Parse &middot; 10 MB</span>
+      <span class="section-tag">Aggregate Score</span>
     </div>
     <div class="podium" id="podium"></div>
   </section>
@@ -579,7 +579,7 @@
 // ===================================================================
 const BENCHMARK_DATA = {
   "meta": {
-    "date": "2026-04-06T11:53:19.936717+00:00",
+    "date": "2026-04-06T12:39:38.211373+00:00",
     "runner": "local",
     "lib_count": 14,
     "op_count": 4
@@ -674,45 +674,10 @@ const BENCHMARK_DATA = {
       "100KB": [
         {
           "library": "quick-xml",
-          "time_ms": 0.384,
-          "throughput_mbs": 258.8,
-          "memory_mb": 2.0,
-          "cpu_ms": 30.0
-        },
-        {
-          "library": "RapidXML",
-          "time_ms": 0.429,
-          "throughput_mbs": 231.6,
-          "memory_mb": 3.6,
-          "cpu_ms": 40.0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 0.671,
-          "throughput_mbs": 148.1,
-          "memory_mb": 4.0,
-          "cpu_ms": 70.0
-        },
-        {
-          "library": "quick-xml",
-          "time_ms": 1.266,
-          "throughput_mbs": 4434.6,
-          "memory_mb": 7.5,
-          "cpu_ms": 0
-        },
-        {
-          "library": "roxmltree",
-          "time_ms": 2.129,
-          "throughput_mbs": 46.7,
-          "memory_mb": 3.2,
-          "cpu_ms": 210.0
-        },
-        {
-          "library": "libxml2",
-          "time_ms": 2.14,
-          "throughput_mbs": 2623.5,
-          "memory_mb": 16.1,
-          "cpu_ms": 40.0
+          "time_ms": 0.825,
+          "throughput_mbs": 3462.8,
+          "memory_mb": 4.8,
+          "cpu_ms": 15.0
         },
         {
           "library": "lxml",
@@ -729,53 +694,25 @@ const BENCHMARK_DATA = {
           "cpu_ms": 1340.0
         },
         {
-          "library": "cElementTree",
-          "time_ms": 4.767,
-          "throughput_mbs": 20.8,
-          "memory_mb": 15.7,
-          "cpu_ms": 860.0
-        },
-        {
-          "library": "Xerces",
-          "time_ms": 5.713,
-          "throughput_mbs": 17.4,
-          "memory_mb": 94.6,
-          "cpu_ms": 2610.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 6.073,
-          "throughput_mbs": 16.4,
-          "memory_mb": 42.7,
-          "cpu_ms": 960.0
-        },
-        {
-          "library": "encoding/xml",
-          "time_ms": 7.884,
-          "throughput_mbs": 12.6,
-          "memory_mb": 7.9,
-          "cpu_ms": 830.0
+          "library": "pugixml",
+          "time_ms": 5.242,
+          "throughput_mbs": 545.0,
+          "memory_mb": 9.2,
+          "cpu_ms": 245.0
         },
         {
           "library": "libxml2",
-          "time_ms": 8.371,
-          "throughput_mbs": 11.9,
-          "memory_mb": 6.5,
-          "cpu_ms": 810.0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 9.813,
-          "throughput_mbs": 572.1,
-          "memory_mb": 14.3,
-          "cpu_ms": 420.0
+          "time_ms": 5.256,
+          "throughput_mbs": 543.6,
+          "memory_mb": 11.3,
+          "cpu_ms": 425.0
         },
         {
           "library": "RapidXML",
-          "time_ms": 11.888,
-          "throughput_mbs": 472.3,
-          "memory_mb": 19.9,
-          "cpu_ms": 120.0
+          "time_ms": 6.159,
+          "throughput_mbs": 463.9,
+          "memory_mb": 11.8,
+          "cpu_ms": 80.0
         },
         {
           "library": "fast-xml-parser",
@@ -786,82 +723,47 @@ const BENCHMARK_DATA = {
         },
         {
           "library": "Xerces",
-          "time_ms": 50.296,
-          "throughput_mbs": 111.6,
-          "memory_mb": 112.3,
+          "time_ms": 28.005,
+          "throughput_mbs": 102.0,
+          "memory_mb": 103.4,
           "cpu_ms": 2610.0
         },
         {
           "library": "cElementTree",
-          "time_ms": 53.629,
-          "throughput_mbs": 104.7,
-          "memory_mb": 30.1,
-          "cpu_ms": 650.0
+          "time_ms": 29.198,
+          "throughput_mbs": 97.8,
+          "memory_mb": 22.9,
+          "cpu_ms": 755.0
         },
         {
           "library": "System.Xml",
-          "time_ms": 71.536,
-          "throughput_mbs": 78.5,
-          "memory_mb": 46.0,
-          "cpu_ms": 1160.0
+          "time_ms": 38.805,
+          "throughput_mbs": 73.6,
+          "memory_mb": 44.4,
+          "cpu_ms": 1060.0
         },
         {
           "library": "roxmltree",
-          "time_ms": 90.236,
-          "throughput_mbs": 62.2,
-          "memory_mb": 14.9,
-          "cpu_ms": 460.0
+          "time_ms": 46.183,
+          "throughput_mbs": 61.9,
+          "memory_mb": 9.1,
+          "cpu_ms": 335.0
         },
         {
           "library": "encoding/xml",
-          "time_ms": 160.161,
-          "throughput_mbs": 35.1,
-          "memory_mb": 12.1,
-          "cpu_ms": 810.0
+          "time_ms": 84.023,
+          "throughput_mbs": 34.0,
+          "memory_mb": 10.0,
+          "cpu_ms": 820.0
         }
       ],
       "100MB": [
         {
           "library": "quick-xml",
-          "time_ms": 15.041,
-          "throughput_mbs": 6648.9,
-          "memory_mb": 101.3,
-          "cpu_ms": 180.0
-        },
-        {
-          "library": "libxml2",
-          "time_ms": 65.621,
-          "throughput_mbs": 1524.0,
-          "memory_mb": 205.2,
-          "cpu_ms": 690.0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 191.398,
-          "throughput_mbs": 522.5,
-          "memory_mb": 204.1,
-          "cpu_ms": 1100.0
-        },
-        {
-          "library": "RapidXML",
-          "time_ms": 195.441,
-          "throughput_mbs": 511.7,
-          "memory_mb": 302.6,
-          "cpu_ms": 950.0
-        },
-        {
-          "library": "Xerces",
-          "time_ms": 254.67,
-          "throughput_mbs": 392.7,
-          "memory_mb": 484.0,
-          "cpu_ms": 3410.0
-        },
-        {
-          "library": "quick-xml",
-          "time_ms": 326.248,
-          "throughput_mbs": 338.0,
-          "memory_mb": 111.3,
-          "cpu_ms": 520.0
+          "time_ms": 170.644,
+          "throughput_mbs": 616.1,
+          "memory_mb": 106.3,
+          "cpu_ms": 350.0
         },
         {
           "library": "VTD-XML",
@@ -871,67 +773,53 @@ const BENCHMARK_DATA = {
           "cpu_ms": 2540.0
         },
         {
-          "library": "cElementTree",
-          "time_ms": 623.491,
-          "throughput_mbs": 160.4,
-          "memory_mb": 316.5,
-          "cpu_ms": 1130.0
-        },
-        {
-          "library": "roxmltree",
-          "time_ms": 996.692,
-          "throughput_mbs": 100.3,
-          "memory_mb": 208.3,
-          "cpu_ms": 1200.0
-        },
-        {
           "library": "RapidXML",
-          "time_ms": 1156.182,
-          "throughput_mbs": 95.4,
-          "memory_mb": 546.4,
-          "cpu_ms": 1850.0
-        },
-        {
-          "library": "roxmltree",
-          "time_ms": 1498.525,
-          "throughput_mbs": 73.6,
-          "memory_mb": 616.0,
-          "cpu_ms": 1690.0
+          "time_ms": 675.812,
+          "throughput_mbs": 155.6,
+          "memory_mb": 424.5,
+          "cpu_ms": 1400.0
         },
         {
           "library": "Xerces",
-          "time_ms": 1803.439,
-          "throughput_mbs": 61.1,
-          "memory_mb": 1165.1,
-          "cpu_ms": 10200.0
+          "time_ms": 1029.054,
+          "throughput_mbs": 102.2,
+          "memory_mb": 824.5,
+          "cpu_ms": 6805.0
         },
         {
-          "library": "System.Xml",
-          "time_ms": 1878.176,
-          "throughput_mbs": 58.7,
-          "memory_mb": 1053.6,
-          "cpu_ms": 5670.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 2084.753,
-          "throughput_mbs": 48.0,
-          "memory_mb": 457.4,
-          "cpu_ms": 5490.0
-        },
-        {
-          "library": "encoding/xml",
-          "time_ms": 2178.077,
-          "throughput_mbs": 45.9,
-          "memory_mb": 106.3,
-          "cpu_ms": 2380.0
+          "library": "roxmltree",
+          "time_ms": 1247.609,
+          "throughput_mbs": 84.3,
+          "memory_mb": 412.1,
+          "cpu_ms": 1445.0
         },
         {
           "library": "pugixml",
-          "time_ms": 2666.877,
-          "throughput_mbs": 41.3,
-          "memory_mb": 446.7,
-          "cpu_ms": 5750.0
+          "time_ms": 1429.138,
+          "throughput_mbs": 73.6,
+          "memory_mb": 325.4,
+          "cpu_ms": 3425.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 1981.465,
+          "throughput_mbs": 53.1,
+          "memory_mb": 755.5,
+          "cpu_ms": 5580.0
+        },
+        {
+          "library": "cElementTree",
+          "time_ms": 2071.369,
+          "throughput_mbs": 50.8,
+          "memory_mb": 615.7,
+          "cpu_ms": 2595.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 2393.173,
+          "throughput_mbs": 43.9,
+          "memory_mb": 933.4,
+          "cpu_ms": 3655.0
         },
         {
           "library": "lxml",
@@ -941,25 +829,11 @@ const BENCHMARK_DATA = {
           "cpu_ms": 4030.0
         },
         {
-          "library": "cElementTree",
-          "time_ms": 3519.247,
-          "throughput_mbs": 31.3,
-          "memory_mb": 914.9,
-          "cpu_ms": 4060.0
-        },
-        {
           "library": "encoding/xml",
-          "time_ms": 4203.718,
-          "throughput_mbs": 26.2,
-          "memory_mb": 225.7,
-          "cpu_ms": 4570.0
-        },
-        {
-          "library": "libxml2",
-          "time_ms": 4720.724,
-          "throughput_mbs": 23.4,
-          "memory_mb": 1661.5,
-          "cpu_ms": 6620.0
+          "time_ms": 3190.898,
+          "throughput_mbs": 32.9,
+          "memory_mb": 166.0,
+          "cpu_ms": 3475.0
         },
         {
           "library": "fast-xml-parser",
@@ -972,52 +846,24 @@ const BENCHMARK_DATA = {
       "10MB": [
         {
           "library": "quick-xml",
-          "time_ms": 7.451,
-          "throughput_mbs": 6425.0,
-          "memory_mb": 49.2,
-          "cpu_ms": 90.0
-        },
-        {
-          "library": "quick-xml",
-          "time_ms": 33.719,
-          "throughput_mbs": 318.6,
-          "memory_mb": 12.2,
-          "cpu_ms": 180.0
-        },
-        {
-          "library": "libxml2",
-          "time_ms": 45.296,
-          "throughput_mbs": 1056.9,
-          "memory_mb": 100.6,
-          "cpu_ms": 440.0
+          "time_ms": 20.585,
+          "throughput_mbs": 1423.7,
+          "memory_mb": 30.7,
+          "cpu_ms": 135.0
         },
         {
           "library": "pugixml",
-          "time_ms": 63.577,
-          "throughput_mbs": 169.0,
-          "memory_mb": 46.4,
-          "cpu_ms": 420.0
+          "time_ms": 75.257,
+          "throughput_mbs": 389.4,
+          "memory_mb": 72.8,
+          "cpu_ms": 445.0
         },
         {
           "library": "RapidXML",
-          "time_ms": 73.994,
-          "throughput_mbs": 145.2,
-          "memory_mb": 56.7,
-          "cpu_ms": 460.0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 86.938,
-          "throughput_mbs": 550.6,
-          "memory_mb": 99.1,
-          "cpu_ms": 470.0
-        },
-        {
-          "library": "RapidXML",
-          "time_ms": 89.52,
-          "throughput_mbs": 534.8,
-          "memory_mb": 146.6,
-          "cpu_ms": 490.0
+          "time_ms": 81.757,
+          "throughput_mbs": 358.5,
+          "memory_mb": 101.7,
+          "cpu_ms": 475.0
         },
         {
           "library": "VTD-XML",
@@ -1028,24 +874,17 @@ const BENCHMARK_DATA = {
         },
         {
           "library": "Xerces",
-          "time_ms": 126.403,
-          "throughput_mbs": 85.0,
-          "memory_mb": 438.4,
-          "cpu_ms": 6410.0
+          "time_ms": 214.894,
+          "throughput_mbs": 136.4,
+          "memory_mb": 354.4,
+          "cpu_ms": 4700.0
         },
         {
-          "library": "System.Xml",
-          "time_ms": 183.421,
-          "throughput_mbs": 58.6,
-          "memory_mb": 152.5,
-          "cpu_ms": 3740.0
-        },
-        {
-          "library": "roxmltree",
-          "time_ms": 257.676,
-          "throughput_mbs": 41.7,
-          "memory_mb": 114.2,
-          "cpu_ms": 1310.0
+          "library": "libxml2",
+          "time_ms": 251.017,
+          "throughput_mbs": 116.8,
+          "memory_mb": 137.8,
+          "cpu_ms": 1480.0
         },
         {
           "library": "lxml",
@@ -1055,39 +894,25 @@ const BENCHMARK_DATA = {
           "cpu_ms": 1860.0
         },
         {
-          "library": "Xerces",
-          "time_ms": 303.384,
-          "throughput_mbs": 157.8,
-          "memory_mb": 270.5,
-          "cpu_ms": 2990.0
-        },
-        {
           "library": "cElementTree",
-          "time_ms": 360.528,
-          "throughput_mbs": 132.8,
-          "memory_mb": 158.8,
-          "cpu_ms": 1080.0
+          "time_ms": 386.918,
+          "throughput_mbs": 75.7,
+          "memory_mb": 131.4,
+          "cpu_ms": 1745.0
         },
         {
-          "library": "cElementTree",
-          "time_ms": 413.308,
-          "throughput_mbs": 26.0,
-          "memory_mb": 104.0,
-          "cpu_ms": 2410.0
+          "library": "roxmltree",
+          "time_ms": 554.984,
+          "throughput_mbs": 52.8,
+          "memory_mb": 108.7,
+          "cpu_ms": 1125.0
         },
         {
-          "library": "libxml2",
-          "time_ms": 456.738,
-          "throughput_mbs": 23.5,
-          "memory_mb": 174.9,
-          "cpu_ms": 2520.0
-        },
-        {
-          "library": "encoding/xml",
-          "time_ms": 486.948,
-          "throughput_mbs": 22.1,
-          "memory_mb": 27.0,
-          "cpu_ms": 2570.0
+          "library": "System.Xml",
+          "time_ms": 609.507,
+          "throughput_mbs": 48.1,
+          "memory_mb": 167.6,
+          "cpu_ms": 3320.0
         },
         {
           "library": "fast-xml-parser",
@@ -1097,225 +922,106 @@ const BENCHMARK_DATA = {
           "cpu_ms": 12060.0
         },
         {
-          "library": "roxmltree",
-          "time_ms": 852.291,
-          "throughput_mbs": 56.2,
-          "memory_mb": 103.1,
-          "cpu_ms": 940.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 1035.593,
-          "throughput_mbs": 46.2,
-          "memory_mb": 182.6,
-          "cpu_ms": 2900.0
-        },
-        {
           "library": "encoding/xml",
-          "time_ms": 1613.147,
-          "throughput_mbs": 29.7,
-          "memory_mb": 53.0,
-          "cpu_ms": 1720.0
+          "time_ms": 1050.047,
+          "throughput_mbs": 27.9,
+          "memory_mb": 40.0,
+          "cpu_ms": 2145.0
         }
       ],
       "1KB": [
         {
           "library": "pugixml",
-          "time_ms": 0.002,
-          "throughput_mbs": 437.3,
-          "memory_mb": 3.6,
-          "cpu_ms": 0
-        },
-        {
-          "library": "RapidXML",
-          "time_ms": 0.002,
-          "throughput_mbs": 437.3,
-          "memory_mb": 3.5,
-          "cpu_ms": 0
-        },
-        {
-          "library": "pugixml",
           "time_ms": 0.003,
-          "throughput_mbs": 384.6,
-          "memory_mb": 3.3,
-          "cpu_ms": 0
+          "throughput_mbs": 405.7,
+          "memory_mb": 3.5,
+          "cpu_ms": 0.0
         },
         {
           "library": "RapidXML",
-          "time_ms": 0.004,
-          "throughput_mbs": 288.5,
+          "time_ms": 0.003,
+          "throughput_mbs": 338.1,
           "memory_mb": 3.5,
-          "cpu_ms": 0
+          "cpu_ms": 0.0
         },
         {
           "library": "quick-xml",
-          "time_ms": 0.004,
-          "throughput_mbs": 218.6,
+          "time_ms": 0.005,
+          "throughput_mbs": 202.8,
           "memory_mb": 1.6,
-          "cpu_ms": 0
-        },
-        {
-          "library": "quick-xml",
-          "time_ms": 0.006,
-          "throughput_mbs": 192.3,
-          "memory_mb": 1.7,
-          "cpu_ms": 0
+          "cpu_ms": 0.0
         },
         {
           "library": "roxmltree",
-          "time_ms": 0.021,
-          "throughput_mbs": 41.6,
+          "time_ms": 0.033,
+          "throughput_mbs": 30.7,
           "memory_mb": 1.8,
-          "cpu_ms": 0
+          "cpu_ms": 10.0
         },
         {
           "library": "libxml2",
-          "time_ms": 0.036,
-          "throughput_mbs": 24.3,
+          "time_ms": 0.045,
+          "throughput_mbs": 22.5,
           "memory_mb": 5.2,
           "cpu_ms": 30.0
         },
         {
-          "library": "roxmltree",
-          "time_ms": 0.045,
-          "throughput_mbs": 25.6,
-          "memory_mb": 1.7,
-          "cpu_ms": 20.0
-        },
-        {
           "library": "lxml",
           "time_ms": 0.053,
-          "throughput_mbs": 21.8,
-          "memory_mb": 17.2,
-          "cpu_ms": 180.0
-        },
-        {
-          "library": "lxml",
-          "time_ms": 0.053,
-          "throughput_mbs": 16.5,
-          "memory_mb": 17.0,
-          "cpu_ms": 230.0
-        },
-        {
-          "library": "libxml2",
-          "time_ms": 0.054,
-          "throughput_mbs": 21.4,
-          "memory_mb": 5.3,
-          "cpu_ms": 30.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 0.059,
-          "throughput_mbs": 14.8,
-          "memory_mb": 37.3,
-          "cpu_ms": 220.0
-        },
-        {
-          "library": "encoding/xml",
-          "time_ms": 0.065,
-          "throughput_mbs": 13.5,
-          "memory_mb": 6.7,
-          "cpu_ms": 30.0
+          "throughput_mbs": 19.1,
+          "memory_mb": 17.1,
+          "cpu_ms": 205.0
         },
         {
           "library": "cElementTree",
-          "time_ms": 0.068,
-          "throughput_mbs": 17.0,
+          "time_ms": 0.071,
+          "throughput_mbs": 14.4,
           "memory_mb": 15.4,
+          "cpu_ms": 375.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 0.08,
+          "throughput_mbs": 12.6,
+          "memory_mb": 37.4,
+          "cpu_ms": 265.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 0.095,
+          "throughput_mbs": 10.7,
+          "memory_mb": 6.8,
+          "cpu_ms": 45.0
+        },
+        {
+          "library": "VTD-XML",
+          "time_ms": 0.182,
+          "throughput_mbs": 5.6,
+          "memory_mb": 55.8,
+          "cpu_ms": 960.0
+        },
+        {
+          "library": "fast-xml-parser",
+          "time_ms": 0.285,
+          "throughput_mbs": 3.6,
+          "memory_mb": 60.2,
           "cpu_ms": 380.0
         },
         {
-          "library": "cElementTree",
-          "time_ms": 0.073,
-          "throughput_mbs": 12.0,
-          "memory_mb": 15.5,
-          "cpu_ms": 370.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 0.102,
-          "throughput_mbs": 11.3,
-          "memory_mb": 37.5,
-          "cpu_ms": 310.0
-        },
-        {
-          "library": "encoding/xml",
-          "time_ms": 0.125,
-          "throughput_mbs": 9.2,
-          "memory_mb": 6.8,
-          "cpu_ms": 60.0
-        },
-        {
-          "library": "VTD-XML",
-          "time_ms": 0.163,
-          "throughput_mbs": 5.4,
-          "memory_mb": 56.2,
-          "cpu_ms": 970.0
-        },
-        {
-          "library": "VTD-XML",
-          "time_ms": 0.202,
-          "throughput_mbs": 5.7,
-          "memory_mb": 55.3,
-          "cpu_ms": 950.0
-        },
-        {
-          "library": "fast-xml-parser",
-          "time_ms": 0.252,
-          "throughput_mbs": 3.5,
-          "memory_mb": 60.7,
-          "cpu_ms": 360.0
-        },
-        {
-          "library": "fast-xml-parser",
-          "time_ms": 0.318,
-          "throughput_mbs": 3.6,
-          "memory_mb": 59.8,
-          "cpu_ms": 400.0
-        },
-        {
           "library": "Xerces",
-          "time_ms": 1.242,
-          "throughput_mbs": 0.7,
-          "memory_mb": 82.7,
-          "cpu_ms": 2990.0
-        },
-        {
-          "library": "Xerces",
-          "time_ms": 1.335,
-          "throughput_mbs": 0.9,
-          "memory_mb": 86.2,
-          "cpu_ms": 3050.0
+          "time_ms": 1.288,
+          "throughput_mbs": 0.8,
+          "memory_mb": 84.5,
+          "cpu_ms": 3020.0
         }
       ],
       "1MB": [
         {
-          "library": "pugixml",
-          "time_ms": 3.05,
-          "throughput_mbs": 342.9,
-          "memory_mb": 7.7,
-          "cpu_ms": 70.0
-        },
-        {
           "library": "quick-xml",
-          "time_ms": 5.06,
-          "throughput_mbs": 206.7,
-          "memory_mb": 2.7,
-          "cpu_ms": 100.0
-        },
-        {
-          "library": "RapidXML",
-          "time_ms": 6.909,
-          "throughput_mbs": 151.4,
-          "memory_mb": 9.5,
-          "cpu_ms": 150.0
-        },
-        {
-          "library": "quick-xml",
-          "time_ms": 8.186,
-          "throughput_mbs": 5848.1,
-          "memory_mb": 49.1,
-          "cpu_ms": 80.0
+          "time_ms": 6.623,
+          "throughput_mbs": 3693.1,
+          "memory_mb": 25.9,
+          "cpu_ms": 90.0
         },
         {
           "library": "VTD-XML",
@@ -1325,11 +1031,11 @@ const BENCHMARK_DATA = {
           "cpu_ms": 2040.0
         },
         {
-          "library": "roxmltree",
-          "time_ms": 29.791,
-          "throughput_mbs": 35.1,
-          "memory_mb": 19.2,
-          "cpu_ms": 580.0
+          "library": "pugixml",
+          "time_ms": 37.146,
+          "throughput_mbs": 658.5,
+          "memory_mb": 53.5,
+          "cpu_ms": 265.0
         },
         {
           "library": "lxml",
@@ -1339,60 +1045,18 @@ const BENCHMARK_DATA = {
           "cpu_ms": 940.0
         },
         {
-          "library": "Xerces",
-          "time_ms": 40.122,
-          "throughput_mbs": 26.1,
-          "memory_mb": 129.8,
-          "cpu_ms": 3280.0
-        },
-        {
-          "library": "libxml2",
-          "time_ms": 41.462,
-          "throughput_mbs": 1154.6,
-          "memory_mb": 100.5,
-          "cpu_ms": 450.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 55.815,
-          "throughput_mbs": 18.7,
-          "memory_mb": 51.7,
-          "cpu_ms": 2000.0
-        },
-        {
-          "library": "libxml2",
-          "time_ms": 68.343,
-          "throughput_mbs": 15.3,
-          "memory_mb": 22.4,
-          "cpu_ms": 1390.0
-        },
-        {
-          "library": "encoding/xml",
-          "time_ms": 70.604,
-          "throughput_mbs": 14.8,
-          "memory_mb": 8.5,
-          "cpu_ms": 1500.0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 71.242,
-          "throughput_mbs": 672.0,
-          "memory_mb": 99.2,
-          "cpu_ms": 460.0
-        },
-        {
-          "library": "cElementTree",
-          "time_ms": 72.393,
-          "throughput_mbs": 14.4,
-          "memory_mb": 23.4,
-          "cpu_ms": 1800.0
-        },
-        {
           "library": "RapidXML",
-          "time_ms": 86.814,
-          "throughput_mbs": 551.4,
-          "memory_mb": 146.6,
-          "cpu_ms": 480.0
+          "time_ms": 46.861,
+          "throughput_mbs": 521.9,
+          "memory_mb": 78.0,
+          "cpu_ms": 315.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 54.903,
+          "throughput_mbs": 445.5,
+          "memory_mb": 61.5,
+          "cpu_ms": 920.0
         },
         {
           "library": "fast-xml-parser",
@@ -1403,68 +1067,54 @@ const BENCHMARK_DATA = {
         },
         {
           "library": "Xerces",
-          "time_ms": 380.002,
-          "throughput_mbs": 126.0,
-          "memory_mb": 260.9,
-          "cpu_ms": 3880.0
+          "time_ms": 210.062,
+          "throughput_mbs": 116.4,
+          "memory_mb": 195.3,
+          "cpu_ms": 3580.0
         },
         {
           "library": "cElementTree",
-          "time_ms": 387.416,
-          "throughput_mbs": 123.6,
-          "memory_mb": 158.9,
-          "cpu_ms": 810.0
+          "time_ms": 229.904,
+          "throughput_mbs": 106.4,
+          "memory_mb": 91.2,
+          "cpu_ms": 1305.0
         },
         {
           "library": "roxmltree",
-          "time_ms": 610.44,
-          "throughput_mbs": 78.4,
-          "memory_mb": 103.1,
-          "cpu_ms": 690.0
+          "time_ms": 320.116,
+          "throughput_mbs": 76.4,
+          "memory_mb": 61.1,
+          "cpu_ms": 635.0
         },
         {
           "library": "System.Xml",
-          "time_ms": 619.736,
-          "throughput_mbs": 77.2,
-          "memory_mb": 183.3,
-          "cpu_ms": 2320.0
+          "time_ms": 337.775,
+          "throughput_mbs": 72.4,
+          "memory_mb": 117.5,
+          "cpu_ms": 2160.0
         },
         {
           "library": "encoding/xml",
-          "time_ms": 1244.894,
-          "throughput_mbs": 38.5,
-          "memory_mb": 52.7,
-          "cpu_ms": 1340.0
+          "time_ms": 657.749,
+          "throughput_mbs": 37.2,
+          "memory_mb": 30.6,
+          "cpu_ms": 1420.0
         }
       ],
       "other": [
         {
-          "library": "encoding/xml",
-          "time_ms": 0.049,
-          "throughput_mbs": 204080.4,
-          "memory_mb": 12.5,
-          "cpu_ms": 20.0
-        },
-        {
           "library": "quick-xml",
-          "time_ms": 44.927,
-          "throughput_mbs": 222.6,
-          "memory_mb": 11.7,
-          "cpu_ms": 240.0
+          "time_ms": 51.562,
+          "throughput_mbs": 193.9,
+          "memory_mb": 11.6,
+          "cpu_ms": 270.0
         },
         {
           "library": "pugixml",
-          "time_ms": 53.99,
-          "throughput_mbs": 185.2,
-          "memory_mb": 50.5,
-          "cpu_ms": 360.0
-        },
-        {
-          "library": "quick-xml",
-          "time_ms": 58.197,
-          "throughput_mbs": 171.8,
-          "memory_mb": 11.6,
-          "cpu_ms": 300.0
+          "time_ms": 69.799,
+          "throughput_mbs": 143.3,
+          "memory_mb": 49.4,
+          "cpu_ms": 485.0
         },
         {
           "library": "RapidXML",
@@ -1474,32 +1124,18 @@ const BENCHMARK_DATA = {
           "cpu_ms": 450.0
         },
         {
-          "library": "pugixml",
-          "time_ms": 85.608,
-          "throughput_mbs": 116.8,
-          "memory_mb": 48.3,
-          "cpu_ms": 610.0
-        },
-        {
-          "library": "libxml2",
-          "time_ms": 360.635,
-          "throughput_mbs": 27.7,
-          "memory_mb": 164.8,
-          "cpu_ms": 2000.0
-        },
-        {
-          "library": "libxml2",
-          "time_ms": 473.932,
-          "throughput_mbs": 21.1,
-          "memory_mb": 205.2,
-          "cpu_ms": 2420.0
-        },
-        {
           "library": "encoding/xml",
-          "time_ms": 609.673,
-          "throughput_mbs": 16.4,
-          "memory_mb": 25.8,
-          "cpu_ms": 3300.0
+          "time_ms": 304.861,
+          "throughput_mbs": 32.8,
+          "memory_mb": 19.1,
+          "cpu_ms": 1660.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 417.284,
+          "throughput_mbs": 24.0,
+          "memory_mb": 185.0,
+          "cpu_ms": 2210.0
         },
         {
           "library": "fast-xml-parser",
@@ -1514,17 +1150,10 @@ const BENCHMARK_DATA = {
       "100KB": [
         {
           "library": "pugixml",
-          "time_ms": 0.199,
-          "throughput_mbs": 499.3,
-          "memory_mb": 3.8,
-          "cpu_ms": 20.0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 0.307,
-          "throughput_mbs": 18287.3,
-          "memory_mb": 14.3,
-          "cpu_ms": 140.0
+          "time_ms": 0.253,
+          "throughput_mbs": 11291.7,
+          "memory_mb": 9.1,
+          "cpu_ms": 80.0
         },
         {
           "library": "libxml2",
@@ -1542,17 +1171,10 @@ const BENCHMARK_DATA = {
         },
         {
           "library": "System.Xml",
-          "time_ms": 1.372,
-          "throughput_mbs": 4092.0,
-          "memory_mb": 41.0,
-          "cpu_ms": 220.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 1.724,
-          "throughput_mbs": 57.6,
-          "memory_mb": 43.6,
-          "cpu_ms": 460.0
+          "time_ms": 1.548,
+          "throughput_mbs": 1845.5,
+          "memory_mb": 42.3,
+          "cpu_ms": 340.0
         },
         {
           "library": "VTD-XML",
@@ -1563,47 +1185,26 @@ const BENCHMARK_DATA = {
         },
         {
           "library": "Xerces",
-          "time_ms": 14.765,
-          "throughput_mbs": 6.7,
-          "memory_mb": 192.1,
-          "cpu_ms": 7040.0
-        },
-        {
-          "library": "Xerces",
-          "time_ms": 20.986,
-          "throughput_mbs": 267.5,
-          "memory_mb": 97.6,
-          "cpu_ms": 2710.0
+          "time_ms": 17.876,
+          "throughput_mbs": 159.8,
+          "memory_mb": 144.8,
+          "cpu_ms": 4875.0
         }
       ],
       "100MB": [
         {
           "library": "pugixml",
-          "time_ms": 1.737,
-          "throughput_mbs": 57574.2,
-          "memory_mb": 204.4,
-          "cpu_ms": 740.0
+          "time_ms": 243.111,
+          "throughput_mbs": 432.5,
+          "memory_mb": 350.8,
+          "cpu_ms": 1155.0
         },
         {
           "library": "System.Xml",
-          "time_ms": 10.104,
-          "throughput_mbs": 9897.7,
-          "memory_mb": 336.7,
-          "cpu_ms": 3480.0
-        },
-        {
-          "library": "Xerces",
-          "time_ms": 150.418,
-          "throughput_mbs": 664.9,
-          "memory_mb": 459.6,
-          "cpu_ms": 4790.0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 484.484,
-          "throughput_mbs": 227.6,
-          "memory_mb": 497.1,
-          "cpu_ms": 1570.0
+          "time_ms": 664.235,
+          "throughput_mbs": 158.3,
+          "memory_mb": 486.9,
+          "cpu_ms": 4005.0
         },
         {
           "library": "libxml2",
@@ -1620,11 +1221,11 @@ const BENCHMARK_DATA = {
           "cpu_ms": 4120.0
         },
         {
-          "library": "System.Xml",
-          "time_ms": 1318.365,
-          "throughput_mbs": 83.6,
-          "memory_mb": 637.0,
-          "cpu_ms": 4530.0
+          "library": "Xerces",
+          "time_ms": 3543.774,
+          "throughput_mbs": 29.7,
+          "memory_mb": 2136.2,
+          "cpu_ms": 27145.0
         },
         {
           "library": "VTD-XML",
@@ -1632,36 +1233,22 @@ const BENCHMARK_DATA = {
           "throughput_mbs": 18.9,
           "memory_mb": 592.6,
           "cpu_ms": 15020.0
-        },
-        {
-          "library": "Xerces",
-          "time_ms": 6937.13,
-          "throughput_mbs": 15.9,
-          "memory_mb": 3812.8,
-          "cpu_ms": 49500.0
         }
       ],
       "10MB": [
         {
           "library": "pugixml",
-          "time_ms": 1.818,
-          "throughput_mbs": 26332.4,
-          "memory_mb": 99.4,
-          "cpu_ms": 580.0
+          "time_ms": 10.389,
+          "throughput_mbs": 2821.0,
+          "memory_mb": 74.7,
+          "cpu_ms": 420.0
         },
         {
           "library": "System.Xml",
-          "time_ms": 4.998,
-          "throughput_mbs": 9578.3,
-          "memory_mb": 167.0,
-          "cpu_ms": 1410.0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 18.96,
-          "throughput_mbs": 566.6,
-          "memory_mb": 50.0,
-          "cpu_ms": 260.0
+          "time_ms": 92.167,
+          "throughput_mbs": 318.0,
+          "memory_mb": 135.8,
+          "cpu_ms": 2045.0
         },
         {
           "library": "libxml2",
@@ -1669,13 +1256,6 @@ const BENCHMARK_DATA = {
           "throughput_mbs": 86.3,
           "memory_mb": 170.2,
           "cpu_ms": 1390.0
-        },
-        {
-          "library": "Xerces",
-          "time_ms": 132.455,
-          "throughput_mbs": 361.4,
-          "memory_mb": 241.6,
-          "cpu_ms": 3360.0
         },
         {
           "library": "lxml",
@@ -1686,17 +1266,10 @@ const BENCHMARK_DATA = {
         },
         {
           "library": "Xerces",
-          "time_ms": 158.44,
-          "throughput_mbs": 67.8,
-          "memory_mb": 899.7,
-          "cpu_ms": 13870.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 179.337,
-          "throughput_mbs": 59.9,
-          "memory_mb": 104.7,
-          "cpu_ms": 2680.0
+          "time_ms": 145.447,
+          "throughput_mbs": 201.5,
+          "memory_mb": 570.6,
+          "cpu_ms": 8615.0
         },
         {
           "library": "VTD-XML",
@@ -1710,109 +1283,60 @@ const BENCHMARK_DATA = {
         {
           "library": "pugixml",
           "time_ms": 0.002,
-          "throughput_mbs": 577.0,
-          "memory_mb": 3.5,
+          "throughput_mbs": 507.1,
+          "memory_mb": 3.6,
+          "cpu_ms": 5.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 0.026,
+          "throughput_mbs": 38.3,
+          "memory_mb": 5.5,
           "cpu_ms": 10.0
         },
         {
-          "library": "pugixml",
-          "time_ms": 0.002,
-          "throughput_mbs": 437.3,
-          "memory_mb": 3.7,
-          "cpu_ms": 0
-        },
-        {
-          "library": "libxml2",
-          "time_ms": 0.013,
-          "throughput_mbs": 67.3,
-          "memory_mb": 5.6,
-          "cpu_ms": 0
-        },
-        {
           "library": "lxml",
-          "time_ms": 0.018,
-          "throughput_mbs": 48.6,
-          "memory_mb": 17.0,
-          "cpu_ms": 120.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 0.02,
-          "throughput_mbs": 43.7,
-          "memory_mb": 35.3,
-          "cpu_ms": 150.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 0.035,
-          "throughput_mbs": 33.0,
-          "memory_mb": 36.2,
-          "cpu_ms": 160.0
-        },
-        {
-          "library": "lxml",
-          "time_ms": 0.036,
-          "throughput_mbs": 32.1,
+          "time_ms": 0.027,
+          "throughput_mbs": 37.6,
           "memory_mb": 17.1,
-          "cpu_ms": 140.0
+          "cpu_ms": 130.0
         },
         {
-          "library": "libxml2",
-          "time_ms": 0.04,
-          "throughput_mbs": 28.8,
-          "memory_mb": 5.5,
-          "cpu_ms": 20.0
-        },
-        {
-          "library": "VTD-XML",
-          "time_ms": 0.355,
-          "throughput_mbs": 2.5,
-          "memory_mb": 74.1,
-          "cpu_ms": 1230.0
+          "library": "System.Xml",
+          "time_ms": 0.028,
+          "throughput_mbs": 36.9,
+          "memory_mb": 35.8,
+          "cpu_ms": 155.0
         },
         {
           "library": "VTD-XML",
-          "time_ms": 0.463,
+          "time_ms": 0.409,
           "throughput_mbs": 2.5,
-          "memory_mb": 80.0,
-          "cpu_ms": 1560.0
+          "memory_mb": 77.0,
+          "cpu_ms": 1395.0
         },
         {
           "library": "Xerces",
-          "time_ms": 0.695,
-          "throughput_mbs": 1.3,
-          "memory_mb": 139.8,
-          "cpu_ms": 1790.0
-        },
-        {
-          "library": "Xerces",
-          "time_ms": 0.722,
-          "throughput_mbs": 1.6,
-          "memory_mb": 140.1,
-          "cpu_ms": 1860.0
+          "time_ms": 0.708,
+          "throughput_mbs": 1.4,
+          "memory_mb": 139.9,
+          "cpu_ms": 1825.0
         }
       ],
       "1MB": [
         {
           "library": "pugixml",
-          "time_ms": 1.663,
-          "throughput_mbs": 28786.8,
-          "memory_mb": 99.6,
-          "cpu_ms": 460.0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 1.72,
-          "throughput_mbs": 608.1,
-          "memory_mb": 7.7,
-          "cpu_ms": 60.0
+          "time_ms": 1.692,
+          "throughput_mbs": 14460.0,
+          "memory_mb": 53.6,
+          "cpu_ms": 260.0
         },
         {
           "library": "System.Xml",
-          "time_ms": 5.712,
-          "throughput_mbs": 8381.0,
-          "memory_mb": 166.6,
-          "cpu_ms": 1590.0
+          "time_ms": 11.066,
+          "throughput_mbs": 2210.4,
+          "memory_mb": 109.7,
+          "cpu_ms": 1110.0
         },
         {
           "library": "lxml",
@@ -1829,20 +1353,6 @@ const BENCHMARK_DATA = {
           "cpu_ms": 370.0
         },
         {
-          "library": "System.Xml",
-          "time_ms": 16.419,
-          "throughput_mbs": 63.7,
-          "memory_mb": 52.8,
-          "cpu_ms": 630.0
-        },
-        {
-          "library": "Xerces",
-          "time_ms": 69.214,
-          "throughput_mbs": 15.1,
-          "memory_mb": 190.1,
-          "cpu_ms": 9730.0
-        },
-        {
           "library": "VTD-XML",
           "time_ms": 70.674,
           "throughput_mbs": 14.8,
@@ -1851,26 +1361,19 @@ const BENCHMARK_DATA = {
         },
         {
           "library": "Xerces",
-          "time_ms": 98.309,
-          "throughput_mbs": 487.0,
-          "memory_mb": 245.7,
-          "cpu_ms": 3480.0
+          "time_ms": 83.761,
+          "throughput_mbs": 292.0,
+          "memory_mb": 217.9,
+          "cpu_ms": 6605.0
         }
       ],
       "other": [
         {
           "library": "pugixml",
-          "time_ms": 12.371,
-          "throughput_mbs": 808.3,
-          "memory_mb": 50.7,
-          "cpu_ms": 230.0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 19.131,
-          "throughput_mbs": 522.7,
-          "memory_mb": 60.7,
-          "cpu_ms": 310.0
+          "time_ms": 15.751,
+          "throughput_mbs": 634.9,
+          "memory_mb": 55.7,
+          "cpu_ms": 270.0
         },
         {
           "library": "libxml2",
@@ -1885,31 +1388,10 @@ const BENCHMARK_DATA = {
       "100KB": [
         {
           "library": "libxml2",
-          "time_ms": 0.017,
-          "throughput_mbs": 330248.0,
-          "memory_mb": 16.4,
-          "cpu_ms": 50.0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 0.25,
-          "throughput_mbs": 397.5,
-          "memory_mb": 3.8,
-          "cpu_ms": 20.0
-        },
-        {
-          "library": "quick-xml",
-          "time_ms": 0.43,
-          "throughput_mbs": 231.1,
-          "memory_mb": 2.5,
-          "cpu_ms": 40.0
-        },
-        {
-          "library": "libxml2",
-          "time_ms": 0.984,
-          "throughput_mbs": 101.0,
-          "memory_mb": 6.8,
-          "cpu_ms": 110.0
+          "time_ms": 0.5,
+          "throughput_mbs": 5707.9,
+          "memory_mb": 11.6,
+          "cpu_ms": 80.0
         },
         {
           "library": "lxml",
@@ -1919,32 +1401,18 @@ const BENCHMARK_DATA = {
           "cpu_ms": 250.0
         },
         {
-          "library": "RapidXML",
-          "time_ms": 1.225,
-          "throughput_mbs": 81.1,
-          "memory_mb": 3.8,
-          "cpu_ms": 110.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 2.841,
-          "throughput_mbs": 35.0,
-          "memory_mb": 43.0,
-          "cpu_ms": 490.0
-        },
-        {
           "library": "quick-xml",
-          "time_ms": 3.442,
-          "throughput_mbs": 1631.1,
-          "memory_mb": 19.4,
-          "cpu_ms": 30.0
+          "time_ms": 1.936,
+          "throughput_mbs": 1475.6,
+          "memory_mb": 10.9,
+          "cpu_ms": 35.0
         },
         {
-          "library": "encoding/xml",
-          "time_ms": 5.04,
-          "throughput_mbs": 19.7,
-          "memory_mb": 8.0,
-          "cpu_ms": 590.0
+          "library": "pugixml",
+          "time_ms": 3.911,
+          "throughput_mbs": 730.5,
+          "memory_mb": 12.6,
+          "cpu_ms": 70.0
         },
         {
           "library": "fast-xml-parser",
@@ -1954,17 +1422,10 @@ const BENCHMARK_DATA = {
           "cpu_ms": 800.0
         },
         {
-          "library": "Xerces",
-          "time_ms": 6.69,
-          "throughput_mbs": 14.9,
-          "memory_mb": 106.6,
-          "cpu_ms": 4620.0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 7.572,
-          "throughput_mbs": 741.4,
-          "memory_mb": 21.4,
+          "library": "RapidXML",
+          "time_ms": 8.079,
+          "throughput_mbs": 353.6,
+          "memory_mb": 12.6,
           "cpu_ms": 120.0
         },
         {
@@ -1975,83 +1436,48 @@ const BENCHMARK_DATA = {
           "cpu_ms": 1530.0
         },
         {
-          "library": "RapidXML",
-          "time_ms": 14.932,
-          "throughput_mbs": 376.0,
-          "memory_mb": 21.3,
-          "cpu_ms": 130.0
-        },
-        {
           "library": "Xerces",
-          "time_ms": 56.399,
-          "throughput_mbs": 99.5,
-          "memory_mb": 215.1,
-          "cpu_ms": 4660.0
+          "time_ms": 31.544,
+          "throughput_mbs": 90.6,
+          "memory_mb": 160.8,
+          "cpu_ms": 4640.0
         },
         {
           "library": "encoding/xml",
-          "time_ms": 61.337,
-          "throughput_mbs": 91.5,
-          "memory_mb": 44.7,
-          "cpu_ms": 690.0
+          "time_ms": 33.189,
+          "throughput_mbs": 86.1,
+          "memory_mb": 26.4,
+          "cpu_ms": 640.0
         },
         {
           "library": "System.Xml",
-          "time_ms": 120.39,
-          "throughput_mbs": 46.6,
-          "memory_mb": 78.5,
-          "cpu_ms": 1810.0
+          "time_ms": 61.615,
+          "throughput_mbs": 46.4,
+          "memory_mb": 60.8,
+          "cpu_ms": 1150.0
         }
       ],
       "100MB": [
         {
-          "library": "libxml2",
-          "time_ms": 0.008,
-          "throughput_mbs": 12500808.2,
-          "memory_mb": 204.7,
-          "cpu_ms": 720.0
-        },
-        {
-          "library": "encoding/xml",
-          "time_ms": 0.043,
-          "throughput_mbs": 2325731.8,
-          "memory_mb": 146.5,
-          "cpu_ms": 810.0
-        },
-        {
           "library": "quick-xml",
-          "time_ms": 105.748,
-          "throughput_mbs": 945.7,
-          "memory_mb": 303.8,
-          "cpu_ms": 390.0
+          "time_ms": 201.891,
+          "throughput_mbs": 520.8,
+          "memory_mb": 462.1,
+          "cpu_ms": 830.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 365.364,
+          "throughput_mbs": 287.8,
+          "memory_mb": 994.2,
+          "cpu_ms": 3415.0
         },
         {
           "library": "RapidXML",
-          "time_ms": 132.156,
-          "throughput_mbs": 756.7,
-          "memory_mb": 302.8,
-          "cpu_ms": 960.0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 140.909,
-          "throughput_mbs": 709.7,
-          "memory_mb": 304.6,
-          "cpu_ms": 940.0
-        },
-        {
-          "library": "quick-xml",
-          "time_ms": 298.033,
-          "throughput_mbs": 370.0,
-          "memory_mb": 620.5,
-          "cpu_ms": 1270.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 383.359,
-          "throughput_mbs": 260.9,
-          "memory_mb": 900.9,
-          "cpu_ms": 4970.0
+          "time_ms": 472.266,
+          "throughput_mbs": 222.6,
+          "memory_mb": 499.5,
+          "cpu_ms": 1585.0
         },
         {
           "library": "lxml",
@@ -2061,32 +1487,25 @@ const BENCHMARK_DATA = {
           "cpu_ms": 4040.0
         },
         {
-          "library": "libxml2",
-          "time_ms": 730.719,
-          "throughput_mbs": 150.9,
-          "memory_mb": 1783.8,
-          "cpu_ms": 6110.0
-        },
-        {
-          "library": "RapidXML",
-          "time_ms": 812.376,
-          "throughput_mbs": 135.7,
-          "memory_mb": 696.1,
-          "cpu_ms": 2210.0
-        },
-        {
           "library": "System.Xml",
-          "time_ms": 1044.32,
-          "throughput_mbs": 105.6,
-          "memory_mb": 1478.8,
-          "cpu_ms": 6620.0
+          "time_ms": 713.839,
+          "throughput_mbs": 147.3,
+          "memory_mb": 1189.8,
+          "cpu_ms": 5795.0
         },
         {
           "library": "pugixml",
-          "time_ms": 1566.463,
-          "throughput_mbs": 70.4,
-          "memory_mb": 659.0,
-          "cpu_ms": 2680.0
+          "time_ms": 853.686,
+          "throughput_mbs": 123.2,
+          "memory_mb": 481.8,
+          "cpu_ms": 1810.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 1370.344,
+          "throughput_mbs": 76.7,
+          "memory_mb": 627.2,
+          "cpu_ms": 7170.0
         },
         {
           "library": "Xerces",
@@ -2094,13 +1513,6 @@ const BENCHMARK_DATA = {
           "throughput_mbs": 52.3,
           "memory_mb": 1683.9,
           "cpu_ms": 17780.0
-        },
-        {
-          "library": "encoding/xml",
-          "time_ms": 2740.645,
-          "throughput_mbs": 40.2,
-          "memory_mb": 1108.0,
-          "cpu_ms": 13530.0
         },
         {
           "library": "fast-xml-parser",
@@ -2119,39 +1531,25 @@ const BENCHMARK_DATA = {
       ],
       "10MB": [
         {
-          "library": "libxml2",
-          "time_ms": 0.009,
-          "throughput_mbs": 5319152.4,
-          "memory_mb": 100.6,
-          "cpu_ms": 460.0
+          "library": "quick-xml",
+          "time_ms": 46.822,
+          "throughput_mbs": 625.9,
+          "memory_mb": 104.1,
+          "cpu_ms": 235.0
         },
         {
-          "library": "quick-xml",
-          "time_ms": 25.075,
-          "throughput_mbs": 428.4,
-          "memory_mb": 62.1,
-          "cpu_ms": 250.0
+          "library": "libxml2",
+          "time_ms": 61.749,
+          "throughput_mbs": 474.6,
+          "memory_mb": 140.6,
+          "cpu_ms": 925.0
         },
         {
           "library": "pugixml",
-          "time_ms": 50.871,
-          "throughput_mbs": 211.2,
-          "memory_mb": 73.1,
-          "cpu_ms": 460.0
-        },
-        {
-          "library": "RapidXML",
-          "time_ms": 58.452,
-          "throughput_mbs": 183.8,
-          "memory_mb": 82.1,
-          "cpu_ms": 440.0
-        },
-        {
-          "library": "quick-xml",
-          "time_ms": 68.568,
-          "throughput_mbs": 698.2,
-          "memory_mb": 146.1,
-          "cpu_ms": 220.0
+          "time_ms": 78.167,
+          "throughput_mbs": 374.9,
+          "memory_mb": 110.2,
+          "cpu_ms": 540.0
         },
         {
           "library": "lxml",
@@ -2161,32 +1559,18 @@ const BENCHMARK_DATA = {
           "cpu_ms": 1040.0
         },
         {
-          "library": "System.Xml",
-          "time_ms": 87.335,
-          "throughput_mbs": 123.0,
-          "memory_mb": 193.5,
-          "cpu_ms": 3340.0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 105.463,
-          "throughput_mbs": 453.9,
-          "memory_mb": 147.4,
-          "cpu_ms": 620.0
-        },
-        {
           "library": "RapidXML",
-          "time_ms": 123.029,
-          "throughput_mbs": 389.1,
-          "memory_mb": 154.8,
-          "cpu_ms": 600.0
+          "time_ms": 90.74,
+          "throughput_mbs": 323.0,
+          "memory_mb": 118.5,
+          "cpu_ms": 520.0
         },
         {
-          "library": "libxml2",
-          "time_ms": 123.49,
-          "throughput_mbs": 87.0,
-          "memory_mb": 180.5,
-          "cpu_ms": 1390.0
+          "library": "System.Xml",
+          "time_ms": 190.25,
+          "throughput_mbs": 154.0,
+          "memory_mb": 277.1,
+          "cpu_ms": 3500.0
         },
         {
           "library": "Xerces",
@@ -2194,13 +1578,6 @@ const BENCHMARK_DATA = {
           "throughput_mbs": 39.1,
           "memory_mb": 334.1,
           "cpu_ms": 11320.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 293.166,
-          "throughput_mbs": 163.3,
-          "memory_mb": 360.6,
-          "cpu_ms": 3660.0
         },
         {
           "library": "fast-xml-parser",
@@ -2211,17 +1588,10 @@ const BENCHMARK_DATA = {
         },
         {
           "library": "encoding/xml",
-          "time_ms": 397.407,
-          "throughput_mbs": 120.5,
-          "memory_mb": 273.6,
-          "cpu_ms": 2010.0
-        },
-        {
-          "library": "encoding/xml",
-          "time_ms": 424.643,
-          "throughput_mbs": 25.3,
-          "memory_mb": 141.8,
-          "cpu_ms": 3760.0
+          "time_ms": 411.025,
+          "throughput_mbs": 71.3,
+          "memory_mb": 207.7,
+          "cpu_ms": 2885.0
         },
         {
           "library": "cElementTree",
@@ -2235,172 +1605,81 @@ const BENCHMARK_DATA = {
         {
           "library": "pugixml",
           "time_ms": 0.003,
-          "throughput_mbs": 384.6,
-          "memory_mb": 3.3,
-          "cpu_ms": 0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 0.003,
-          "throughput_mbs": 291.5,
-          "memory_mb": 3.5,
-          "cpu_ms": 0
-        },
-        {
-          "library": "quick-xml",
-          "time_ms": 0.003,
-          "throughput_mbs": 291.5,
-          "memory_mb": 1.6,
-          "cpu_ms": 0
-        },
-        {
-          "library": "RapidXML",
-          "time_ms": 0.004,
-          "throughput_mbs": 288.5,
-          "memory_mb": 3.5,
-          "cpu_ms": 0
+          "throughput_mbs": 338.1,
+          "memory_mb": 3.4,
+          "cpu_ms": 0.0
         },
         {
           "library": "RapidXML",
           "time_ms": 0.005,
-          "throughput_mbs": 174.9,
+          "throughput_mbs": 225.4,
           "memory_mb": 3.5,
-          "cpu_ms": 0
-        },
-        {
-          "library": "lxml",
-          "time_ms": 0.008,
-          "throughput_mbs": 109.3,
-          "memory_mb": 17.0,
-          "cpu_ms": 110.0
-        },
-        {
-          "library": "lxml",
-          "time_ms": 0.011,
-          "throughput_mbs": 104.9,
-          "memory_mb": 16.8,
-          "cpu_ms": 140.0
+          "cpu_ms": 0.0
         },
         {
           "library": "quick-xml",
-          "time_ms": 0.011,
-          "throughput_mbs": 104.9,
+          "time_ms": 0.007,
+          "throughput_mbs": 144.9,
           "memory_mb": 1.6,
-          "cpu_ms": 0
+          "cpu_ms": 0.0
+        },
+        {
+          "library": "lxml",
+          "time_ms": 0.009,
+          "throughput_mbs": 106.8,
+          "memory_mb": 16.9,
+          "cpu_ms": 125.0
         },
         {
           "library": "libxml2",
-          "time_ms": 0.012,
-          "throughput_mbs": 72.9,
+          "time_ms": 0.015,
+          "throughput_mbs": 69.9,
           "memory_mb": 5.5,
-          "cpu_ms": 20.0
-        },
-        {
-          "library": "libxml2",
-          "time_ms": 0.017,
-          "throughput_mbs": 67.9,
-          "memory_mb": 5.6,
-          "cpu_ms": 10.0
+          "cpu_ms": 15.0
         },
         {
           "library": "System.Xml",
-          "time_ms": 0.026,
-          "throughput_mbs": 33.6,
+          "time_ms": 0.032,
+          "throughput_mbs": 32.2,
           "memory_mb": 38.2,
-          "cpu_ms": 140.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 0.037,
-          "throughput_mbs": 31.2,
-          "memory_mb": 38.2,
-          "cpu_ms": 200.0
-        },
-        {
-          "library": "encoding/xml",
-          "time_ms": 0.043,
-          "throughput_mbs": 20.3,
-          "memory_mb": 6.7,
-          "cpu_ms": 20.0
-        },
-        {
-          "library": "fast-xml-parser",
-          "time_ms": 0.086,
-          "throughput_mbs": 10.2,
-          "memory_mb": 57.5,
           "cpu_ms": 170.0
         },
         {
           "library": "fast-xml-parser",
-          "time_ms": 0.093,
-          "throughput_mbs": 12.4,
-          "memory_mb": 56.1,
-          "cpu_ms": 160.0
+          "time_ms": 0.089,
+          "throughput_mbs": 11.3,
+          "memory_mb": 56.8,
+          "cpu_ms": 165.0
         },
         {
           "library": "encoding/xml",
-          "time_ms": 0.147,
-          "throughput_mbs": 7.8,
-          "memory_mb": 7.0,
-          "cpu_ms": 90.0
+          "time_ms": 0.095,
+          "throughput_mbs": 10.7,
+          "memory_mb": 6.8,
+          "cpu_ms": 55.0
         },
         {
           "library": "cElementTree",
-          "time_ms": 0.22,
-          "throughput_mbs": 5.2,
+          "time_ms": 0.225,
+          "throughput_mbs": 4.5,
           "memory_mb": 15.7,
-          "cpu_ms": 530.0
-        },
-        {
-          "library": "cElementTree",
-          "time_ms": 0.229,
-          "throughput_mbs": 3.8,
-          "memory_mb": 15.7,
-          "cpu_ms": 470.0
+          "cpu_ms": 500.0
         },
         {
           "library": "Xerces",
-          "time_ms": 0.569,
-          "throughput_mbs": 1.5,
-          "memory_mb": 69.3,
-          "cpu_ms": 2030.0
-        },
-        {
-          "library": "Xerces",
-          "time_ms": 0.928,
-          "throughput_mbs": 1.2,
-          "memory_mb": 80.2,
-          "cpu_ms": 2800.0
+          "time_ms": 0.748,
+          "throughput_mbs": 1.4,
+          "memory_mb": 74.8,
+          "cpu_ms": 2415.0
         }
       ],
       "1MB": [
         {
           "library": "libxml2",
-          "time_ms": 0.014,
-          "throughput_mbs": 3419455.1,
-          "memory_mb": 100.7,
-          "cpu_ms": 470.0
-        },
-        {
-          "library": "quick-xml",
-          "time_ms": 3.162,
-          "throughput_mbs": 330.8,
-          "memory_mb": 7.5,
-          "cpu_ms": 80.0
-        },
-        {
-          "library": "RapidXML",
-          "time_ms": 6.704,
-          "throughput_mbs": 156.0,
-          "memory_mb": 11.2,
-          "cpu_ms": 160.0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 6.839,
-          "throughput_mbs": 152.9,
-          "memory_mb": 10.3,
-          "cpu_ms": 160.0
+          "time_ms": 6.025,
+          "throughput_mbs": 4059.6,
+          "memory_mb": 61.7,
+          "cpu_ms": 395.0
         },
         {
           "library": "lxml",
@@ -2410,18 +1689,18 @@ const BENCHMARK_DATA = {
           "cpu_ms": 350.0
         },
         {
-          "library": "libxml2",
-          "time_ms": 12.036,
-          "throughput_mbs": 86.9,
-          "memory_mb": 22.7,
-          "cpu_ms": 320.0
+          "library": "quick-xml",
+          "time_ms": 36.193,
+          "throughput_mbs": 675.8,
+          "memory_mb": 76.8,
+          "cpu_ms": 160.0
         },
         {
-          "library": "System.Xml",
-          "time_ms": 18.504,
-          "throughput_mbs": 56.5,
-          "memory_mb": 61.7,
-          "cpu_ms": 850.0
+          "library": "pugixml",
+          "time_ms": 39.593,
+          "throughput_mbs": 617.8,
+          "memory_mb": 78.8,
+          "cpu_ms": 460.0
         },
         {
           "library": "Xerces",
@@ -2438,32 +1717,11 @@ const BENCHMARK_DATA = {
           "cpu_ms": 1740.0
         },
         {
-          "library": "encoding/xml",
-          "time_ms": 56.192,
-          "throughput_mbs": 18.6,
-          "memory_mb": 22.6,
-          "cpu_ms": 1550.0
-        },
-        {
-          "library": "quick-xml",
-          "time_ms": 69.223,
-          "throughput_mbs": 691.6,
-          "memory_mb": 146.2,
-          "cpu_ms": 240.0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 72.346,
-          "throughput_mbs": 661.7,
-          "memory_mb": 147.2,
-          "cpu_ms": 760.0
-        },
-        {
           "library": "RapidXML",
-          "time_ms": 78.55,
-          "throughput_mbs": 609.5,
-          "memory_mb": 154.5,
-          "cpu_ms": 580.0
+          "time_ms": 42.627,
+          "throughput_mbs": 573.8,
+          "memory_mb": 82.8,
+          "cpu_ms": 370.0
         },
         {
           "library": "cElementTree",
@@ -2474,40 +1732,26 @@ const BENCHMARK_DATA = {
         },
         {
           "library": "System.Xml",
-          "time_ms": 341.325,
-          "throughput_mbs": 140.3,
-          "memory_mb": 359.8,
-          "cpu_ms": 2870.0
+          "time_ms": 179.915,
+          "throughput_mbs": 135.9,
+          "memory_mb": 210.8,
+          "cpu_ms": 1860.0
         },
         {
           "library": "encoding/xml",
-          "time_ms": 492.882,
-          "throughput_mbs": 97.1,
-          "memory_mb": 273.3,
-          "cpu_ms": 2240.0
+          "time_ms": 274.537,
+          "throughput_mbs": 89.1,
+          "memory_mb": 148.0,
+          "cpu_ms": 1895.0
         }
       ],
       "other": [
         {
-          "library": "libxml2",
-          "time_ms": 0.008,
-          "throughput_mbs": 1250000.0,
-          "memory_mb": 205.5,
-          "cpu_ms": 840.0
-        },
-        {
-          "library": "encoding/xml",
-          "time_ms": 0.016,
-          "throughput_mbs": 624996.4,
-          "memory_mb": 12.6,
-          "cpu_ms": 80.0
-        },
-        {
           "library": "quick-xml",
-          "time_ms": 11.641,
-          "throughput_mbs": 859.0,
-          "memory_mb": 42.6,
-          "cpu_ms": 140.0
+          "time_ms": 30.45,
+          "throughput_mbs": 328.4,
+          "memory_mb": 63.0,
+          "cpu_ms": 290.0
         },
         {
           "library": "RapidXML",
@@ -2517,32 +1761,25 @@ const BENCHMARK_DATA = {
           "cpu_ms": 380.0
         },
         {
-          "library": "quick-xml",
-          "time_ms": 49.258,
-          "throughput_mbs": 203.0,
-          "memory_mb": 83.5,
-          "cpu_ms": 440.0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 56.552,
-          "throughput_mbs": 176.8,
-          "memory_mb": 76.9,
-          "cpu_ms": 470.0
-        },
-        {
-          "library": "pugixml",
-          "time_ms": 60.234,
-          "throughput_mbs": 166.0,
-          "memory_mb": 74.3,
-          "cpu_ms": 440.0
-        },
-        {
           "library": "libxml2",
-          "time_ms": 96.44,
-          "throughput_mbs": 103.7,
-          "memory_mb": 155.2,
-          "cpu_ms": 1210.0
+          "time_ms": 48.224,
+          "throughput_mbs": 207.4,
+          "memory_mb": 180.3,
+          "cpu_ms": 1025.0
+        },
+        {
+          "library": "pugixml",
+          "time_ms": 58.393,
+          "throughput_mbs": 171.3,
+          "memory_mb": 75.6,
+          "cpu_ms": 455.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 173.118,
+          "throughput_mbs": 57.8,
+          "memory_mb": 71.4,
+          "cpu_ms": 2140.0
         },
         {
           "library": "fast-xml-parser",
@@ -2550,13 +1787,6 @@ const BENCHMARK_DATA = {
           "throughput_mbs": 38.5,
           "memory_mb": 295.6,
           "cpu_ms": 6210.0
-        },
-        {
-          "library": "encoding/xml",
-          "time_ms": 346.22,
-          "throughput_mbs": 28.9,
-          "memory_mb": 130.2,
-          "cpu_ms": 4200.0
         }
       ]
     },
@@ -2564,38 +1794,17 @@ const BENCHMARK_DATA = {
       "100KB": [
         {
           "library": "quick-xml",
-          "time_ms": 0.437,
-          "throughput_mbs": 227.4,
-          "memory_mb": 1.7,
-          "cpu_ms": 40.0
-        },
-        {
-          "library": "quick-xml",
-          "time_ms": 1.042,
-          "throughput_mbs": 5387.9,
-          "memory_mb": 7.3,
-          "cpu_ms": 20.0
+          "time_ms": 0.74,
+          "throughput_mbs": 3863.1,
+          "memory_mb": 4.5,
+          "cpu_ms": 30.0
         },
         {
           "library": "libxml2",
-          "time_ms": 1.278,
-          "throughput_mbs": 77.8,
-          "memory_mb": 5.2,
-          "cpu_ms": 130.0
-        },
-        {
-          "library": "libxml2",
-          "time_ms": 2.02,
-          "throughput_mbs": 2779.3,
-          "memory_mb": 16.1,
-          "cpu_ms": 90.0
-        },
-        {
-          "library": "Expat",
-          "time_ms": 2.07,
-          "throughput_mbs": 48.0,
-          "memory_mb": 3.8,
-          "cpu_ms": 200.0
+          "time_ms": 1.649,
+          "throughput_mbs": 1732.4,
+          "memory_mb": 10.7,
+          "cpu_ms": 110.0
         },
         {
           "library": "Woodstox",
@@ -2605,125 +1814,69 @@ const BENCHMARK_DATA = {
           "cpu_ms": 1580.0
         },
         {
-          "library": "System.Xml",
-          "time_ms": 3.388,
-          "throughput_mbs": 29.3,
-          "memory_mb": 39.3,
-          "cpu_ms": 700.0
-        },
-        {
-          "library": "Xerces",
-          "time_ms": 6.302,
-          "throughput_mbs": 15.8,
-          "memory_mb": 65.8,
-          "cpu_ms": 2530.0
-        },
-        {
-          "library": "encoding/xml",
-          "time_ms": 9.08,
-          "throughput_mbs": 10.9,
-          "memory_mb": 8.2,
-          "cpu_ms": 970.0
-        },
-        {
           "library": "Expat",
-          "time_ms": 11.891,
-          "throughput_mbs": 472.1,
-          "memory_mb": 14.2,
-          "cpu_ms": 170.0
+          "time_ms": 6.981,
+          "throughput_mbs": 409.3,
+          "memory_mb": 9.0,
+          "cpu_ms": 185.0
         },
         {
           "library": "Xerces",
-          "time_ms": 21.573,
-          "throughput_mbs": 260.2,
-          "memory_mb": 66.7,
-          "cpu_ms": 2040.0
+          "time_ms": 13.938,
+          "throughput_mbs": 205.0,
+          "memory_mb": 66.2,
+          "cpu_ms": 2285.0
         },
         {
           "library": "System.Xml",
-          "time_ms": 127.715,
-          "throughput_mbs": 44.0,
-          "memory_mb": 50.6,
-          "cpu_ms": 1270.0
+          "time_ms": 65.552,
+          "throughput_mbs": 43.6,
+          "memory_mb": 45.0,
+          "cpu_ms": 985.0
         },
         {
           "library": "encoding/xml",
-          "time_ms": 189.858,
-          "throughput_mbs": 29.6,
-          "memory_mb": 12.3,
+          "time_ms": 99.469,
+          "throughput_mbs": 28.7,
+          "memory_mb": 10.2,
           "cpu_ms": 970.0
         }
       ],
       "100MB": [
         {
           "library": "quick-xml",
-          "time_ms": 14.256,
-          "throughput_mbs": 7015.0,
-          "memory_mb": 101.5,
-          "cpu_ms": 180.0
+          "time_ms": 121.562,
+          "throughput_mbs": 864.9,
+          "memory_mb": 106.4,
+          "cpu_ms": 310.0
         },
         {
           "library": "libxml2",
-          "time_ms": 71.123,
-          "throughput_mbs": 1406.1,
-          "memory_mb": 204.9,
-          "cpu_ms": 830.0
-        },
-        {
-          "library": "Expat",
-          "time_ms": 157.074,
-          "throughput_mbs": 636.7,
-          "memory_mb": 203.5,
-          "cpu_ms": 750.0
-        },
-        {
-          "library": "quick-xml",
-          "time_ms": 228.869,
-          "throughput_mbs": 481.8,
-          "memory_mb": 111.3,
-          "cpu_ms": 440.0
-        },
-        {
-          "library": "Xerces",
-          "time_ms": 234.149,
-          "throughput_mbs": 427.1,
-          "memory_mb": 257.9,
-          "cpu_ms": 2300.0
+          "time_ms": 320.269,
+          "throughput_mbs": 328.3,
+          "memory_mb": 214.9,
+          "cpu_ms": 1030.0
         },
         {
           "library": "System.Xml",
-          "time_ms": 411.929,
-          "throughput_mbs": 267.7,
-          "memory_mb": 147.3,
-          "cpu_ms": 2040.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 471.844,
-          "throughput_mbs": 211.9,
-          "memory_mb": 201.2,
-          "cpu_ms": 2260.0
-        },
-        {
-          "library": "libxml2",
-          "time_ms": 569.414,
-          "throughput_mbs": 193.6,
-          "memory_mb": 224.9,
-          "cpu_ms": 1230.0
+          "time_ms": 441.886,
+          "throughput_mbs": 237.9,
+          "memory_mb": 174.2,
+          "cpu_ms": 2150.0
         },
         {
           "library": "Expat",
-          "time_ms": 800.997,
-          "throughput_mbs": 137.7,
-          "memory_mb": 223.5,
-          "cpu_ms": 1620.0
+          "time_ms": 479.035,
+          "throughput_mbs": 219.5,
+          "memory_mb": 213.5,
+          "cpu_ms": 1185.0
         },
         {
           "library": "Xerces",
-          "time_ms": 933.652,
-          "throughput_mbs": 118.1,
-          "memory_mb": 280.7,
-          "cpu_ms": 3880.0
+          "time_ms": 583.9,
+          "throughput_mbs": 180.1,
+          "memory_mb": 269.3,
+          "cpu_ms": 3090.0
         },
         {
           "library": "Woodstox",
@@ -2734,68 +1887,33 @@ const BENCHMARK_DATA = {
         },
         {
           "library": "encoding/xml",
-          "time_ms": 2095.357,
-          "throughput_mbs": 47.7,
-          "memory_mb": 106.2,
-          "cpu_ms": 2320.0
-        },
-        {
-          "library": "encoding/xml",
-          "time_ms": 4357.812,
-          "throughput_mbs": 25.3,
-          "memory_mb": 226.0,
-          "cpu_ms": 4810.0
+          "time_ms": 3226.584,
+          "throughput_mbs": 32.6,
+          "memory_mb": 166.1,
+          "cpu_ms": 3565.0
         }
       ],
       "10MB": [
         {
           "library": "quick-xml",
-          "time_ms": 8.031,
-          "throughput_mbs": 5960.9,
-          "memory_mb": 49.5,
-          "cpu_ms": 80.0
-        },
-        {
-          "library": "quick-xml",
-          "time_ms": 31.06,
-          "throughput_mbs": 345.9,
-          "memory_mb": 12.1,
-          "cpu_ms": 170.0
+          "time_ms": 19.546,
+          "throughput_mbs": 1499.4,
+          "memory_mb": 30.8,
+          "cpu_ms": 125.0
         },
         {
           "library": "libxml2",
-          "time_ms": 39.075,
-          "throughput_mbs": 1225.1,
-          "memory_mb": 100.5,
-          "cpu_ms": 450.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 64.156,
-          "throughput_mbs": 167.4,
-          "memory_mb": 47.8,
-          "cpu_ms": 1920.0
+          "time_ms": 98.737,
+          "throughput_mbs": 296.8,
+          "memory_mb": 63.1,
+          "cpu_ms": 750.0
         },
         {
           "library": "Expat",
-          "time_ms": 68.267,
-          "throughput_mbs": 701.3,
-          "memory_mb": 99.3,
-          "cpu_ms": 600.0
-        },
-        {
-          "library": "Xerces",
-          "time_ms": 142.284,
-          "throughput_mbs": 75.5,
-          "memory_mb": 83.5,
-          "cpu_ms": 4470.0
-        },
-        {
-          "library": "Expat",
-          "time_ms": 145.543,
-          "throughput_mbs": 73.8,
-          "memory_mb": 24.6,
-          "cpu_ms": 820.0
+          "time_ms": 106.905,
+          "throughput_mbs": 274.1,
+          "memory_mb": 62.0,
+          "cpu_ms": 710.0
         },
         {
           "library": "Woodstox",
@@ -2805,154 +1923,84 @@ const BENCHMARK_DATA = {
           "cpu_ms": 4050.0
         },
         {
-          "library": "libxml2",
-          "time_ms": 158.398,
-          "throughput_mbs": 67.8,
-          "memory_mb": 25.8,
-          "cpu_ms": 1050.0
+          "library": "System.Xml",
+          "time_ms": 205.016,
+          "throughput_mbs": 143.0,
+          "memory_mb": 89.0,
+          "cpu_ms": 1710.0
         },
         {
           "library": "Xerces",
-          "time_ms": 280.252,
-          "throughput_mbs": 170.8,
-          "memory_mb": 151.2,
-          "cpu_ms": 2660.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 345.875,
-          "throughput_mbs": 138.4,
-          "memory_mb": 130.2,
-          "cpu_ms": 1500.0
+          "time_ms": 211.268,
+          "throughput_mbs": 138.7,
+          "memory_mb": 117.3,
+          "cpu_ms": 3565.0
         },
         {
           "library": "encoding/xml",
-          "time_ms": 507.974,
-          "throughput_mbs": 21.1,
-          "memory_mb": 26.6,
-          "cpu_ms": 2690.0
-        },
-        {
-          "library": "encoding/xml",
-          "time_ms": 1635.593,
-          "throughput_mbs": 29.3,
-          "memory_mb": 52.6,
-          "cpu_ms": 1760.0
+          "time_ms": 1071.784,
+          "throughput_mbs": 27.3,
+          "memory_mb": 39.6,
+          "cpu_ms": 2225.0
         }
       ],
       "1KB": [
         {
           "library": "quick-xml",
           "time_ms": 0.006,
-          "throughput_mbs": 192.3,
-          "memory_mb": 1.7,
-          "cpu_ms": 0
-        },
-        {
-          "library": "quick-xml",
-          "time_ms": 0.006,
-          "throughput_mbs": 145.8,
+          "throughput_mbs": 169.0,
           "memory_mb": 1.6,
-          "cpu_ms": 0
+          "cpu_ms": 0.0
         },
         {
           "library": "libxml2",
-          "time_ms": 0.016,
-          "throughput_mbs": 54.7,
-          "memory_mb": 5.1,
-          "cpu_ms": 10.0
-        },
-        {
-          "library": "libxml2",
-          "time_ms": 0.024,
-          "throughput_mbs": 48.1,
-          "memory_mb": 5.5,
+          "time_ms": 0.02,
+          "throughput_mbs": 50.7,
+          "memory_mb": 5.3,
           "cpu_ms": 10.0
         },
         {
           "library": "Expat",
           "time_ms": 0.027,
-          "throughput_mbs": 42.7,
-          "memory_mb": 3.6,
-          "cpu_ms": 10.0
-        },
-        {
-          "library": "Expat",
-          "time_ms": 0.027,
-          "throughput_mbs": 32.4,
+          "throughput_mbs": 37.6,
           "memory_mb": 3.5,
           "cpu_ms": 10.0
         },
         {
           "library": "encoding/xml",
-          "time_ms": 0.063,
-          "throughput_mbs": 13.9,
-          "memory_mb": 6.6,
-          "cpu_ms": 30.0
-        },
-        {
-          "library": "encoding/xml",
-          "time_ms": 0.074,
-          "throughput_mbs": 15.6,
-          "memory_mb": 6.3,
-          "cpu_ms": 40.0
+          "time_ms": 0.069,
+          "throughput_mbs": 14.8,
+          "memory_mb": 6.4,
+          "cpu_ms": 35.0
         },
         {
           "library": "System.Xml",
-          "time_ms": 0.098,
-          "throughput_mbs": 11.8,
-          "memory_mb": 39.5,
-          "cpu_ms": 210.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 0.119,
-          "throughput_mbs": 7.3,
-          "memory_mb": 38.8,
-          "cpu_ms": 200.0
+          "time_ms": 0.108,
+          "throughput_mbs": 9.3,
+          "memory_mb": 39.1,
+          "cpu_ms": 205.0
         },
         {
           "library": "Woodstox",
-          "time_ms": 0.241,
-          "throughput_mbs": 4.8,
-          "memory_mb": 51.2,
-          "cpu_ms": 1100.0
-        },
-        {
-          "library": "Woodstox",
-          "time_ms": 0.362,
-          "throughput_mbs": 2.4,
-          "memory_mb": 49.5,
-          "cpu_ms": 1300.0
+          "time_ms": 0.301,
+          "throughput_mbs": 3.4,
+          "memory_mb": 50.4,
+          "cpu_ms": 1200.0
         },
         {
           "library": "Xerces",
-          "time_ms": 1.049,
-          "throughput_mbs": 0.8,
-          "memory_mb": 76.3,
-          "cpu_ms": 2470.0
-        },
-        {
-          "library": "Xerces",
-          "time_ms": 1.749,
+          "time_ms": 1.399,
           "throughput_mbs": 0.7,
-          "memory_mb": 78.2,
-          "cpu_ms": 3030.0
+          "memory_mb": 77.2,
+          "cpu_ms": 2750.0
         }
       ],
       "1MB": [
         {
           "library": "quick-xml",
-          "time_ms": 5.506,
-          "throughput_mbs": 189.9,
-          "memory_mb": 2.6,
-          "cpu_ms": 100.0
-        },
-        {
-          "library": "quick-xml",
-          "time_ms": 8.1,
-          "throughput_mbs": 5910.2,
-          "memory_mb": 49.6,
+          "time_ms": 6.803,
+          "throughput_mbs": 3595.3,
+          "memory_mb": 26.1,
           "cpu_ms": 100.0
         },
         {
@@ -2964,135 +2012,130 @@ const BENCHMARK_DATA = {
         },
         {
           "library": "libxml2",
-          "time_ms": 17.752,
-          "throughput_mbs": 58.9,
-          "memory_mb": 6.8,
-          "cpu_ms": 380.0
-        },
-        {
-          "library": "Xerces",
-          "time_ms": 20.106,
-          "throughput_mbs": 52.0,
-          "memory_mb": 65.0,
-          "cpu_ms": 2920.0
+          "time_ms": 25.255,
+          "throughput_mbs": 968.5,
+          "memory_mb": 53.5,
+          "cpu_ms": 435.0
         },
         {
           "library": "Expat",
-          "time_ms": 22.584,
-          "throughput_mbs": 46.3,
-          "memory_mb": 5.3,
-          "cpu_ms": 440.0
-        },
-        {
-          "library": "System.Xml",
-          "time_ms": 25.233,
-          "throughput_mbs": 41.4,
-          "memory_mb": 37.8,
-          "cpu_ms": 1000.0
-        },
-        {
-          "library": "libxml2",
-          "time_ms": 32.757,
-          "throughput_mbs": 1461.4,
-          "memory_mb": 100.2,
-          "cpu_ms": 490.0
-        },
-        {
-          "library": "encoding/xml",
-          "time_ms": 70.111,
-          "throughput_mbs": 14.9,
-          "memory_mb": 8.4,
-          "cpu_ms": 1520.0
-        },
-        {
-          "library": "Expat",
-          "time_ms": 71.955,
-          "throughput_mbs": 665.3,
-          "memory_mb": 99.1,
-          "cpu_ms": 430.0
+          "time_ms": 47.27,
+          "throughput_mbs": 517.4,
+          "memory_mb": 52.2,
+          "cpu_ms": 435.0
         },
         {
           "library": "Xerces",
-          "time_ms": 251.541,
-          "throughput_mbs": 190.3,
-          "memory_mb": 152.1,
-          "cpu_ms": 2210.0
+          "time_ms": 135.823,
+          "throughput_mbs": 180.1,
+          "memory_mb": 108.5,
+          "cpu_ms": 2565.0
         },
         {
           "library": "System.Xml",
-          "time_ms": 631.906,
-          "throughput_mbs": 75.8,
-          "memory_mb": 130.5,
-          "cpu_ms": 1930.0
+          "time_ms": 328.569,
+          "throughput_mbs": 74.4,
+          "memory_mb": 84.2,
+          "cpu_ms": 1465.0
         },
         {
           "library": "encoding/xml",
-          "time_ms": 1353.848,
-          "throughput_mbs": 35.4,
-          "memory_mb": 52.7,
-          "cpu_ms": 1470.0
+          "time_ms": 711.98,
+          "throughput_mbs": 34.4,
+          "memory_mb": 30.6,
+          "cpu_ms": 1495.0
         }
       ],
       "other": [
         {
-          "library": "encoding/xml",
-          "time_ms": 0.016,
-          "throughput_mbs": 624996.4,
-          "memory_mb": 12.2,
-          "cpu_ms": 30.0
-        },
-        {
           "library": "quick-xml",
-          "time_ms": 24.909,
-          "throughput_mbs": 401.5,
-          "memory_mb": 11.5,
-          "cpu_ms": 140.0
-        },
-        {
-          "library": "quick-xml",
-          "time_ms": 48.599,
-          "throughput_mbs": 205.8,
-          "memory_mb": 11.3,
-          "cpu_ms": 260.0
+          "time_ms": 36.754,
+          "throughput_mbs": 272.1,
+          "memory_mb": 11.4,
+          "cpu_ms": 200.0
         },
         {
           "library": "libxml2",
-          "time_ms": 91.612,
-          "throughput_mbs": 109.2,
-          "memory_mb": 34.5,
-          "cpu_ms": 550.0
-        },
-        {
-          "library": "libxml2",
-          "time_ms": 130.633,
-          "throughput_mbs": 76.6,
-          "memory_mb": 24.8,
-          "cpu_ms": 740.0
+          "time_ms": 111.123,
+          "throughput_mbs": 90.0,
+          "memory_mb": 29.6,
+          "cpu_ms": 645.0
         },
         {
           "library": "Expat",
-          "time_ms": 198.167,
-          "throughput_mbs": 50.5,
-          "memory_mb": 22.8,
-          "cpu_ms": 1110.0
-        },
-        {
-          "library": "Expat",
-          "time_ms": 246.309,
-          "throughput_mbs": 40.6,
-          "memory_mb": 23.1,
-          "cpu_ms": 1320.0
+          "time_ms": 222.238,
+          "throughput_mbs": 45.0,
+          "memory_mb": 23.0,
+          "cpu_ms": 1215.0
         },
         {
           "library": "encoding/xml",
-          "time_ms": 592.733,
-          "throughput_mbs": 16.9,
-          "memory_mb": 25.6,
-          "cpu_ms": 3080.0
+          "time_ms": 296.374,
+          "throughput_mbs": 33.7,
+          "memory_mb": 18.9,
+          "cpu_ms": 1555.0
         }
       ]
     }
-  }
+  },
+  "rankings": [
+    {
+      "library": "quick-xml",
+      "score": 93.3
+    },
+    {
+      "library": "pugixml",
+      "score": 53.4
+    },
+    {
+      "library": "RapidXML",
+      "score": 36.8
+    },
+    {
+      "library": "libxml2",
+      "score": 26.3
+    },
+    {
+      "library": "lxml",
+      "score": 21.1
+    },
+    {
+      "library": "Woodstox",
+      "score": 19.4
+    },
+    {
+      "library": "VTD-XML",
+      "score": 19.2
+    },
+    {
+      "library": "Expat",
+      "score": 18.2
+    },
+    {
+      "library": "System.Xml",
+      "score": 10.7
+    },
+    {
+      "library": "Xerces",
+      "score": 8.1
+    },
+    {
+      "library": "roxmltree",
+      "score": 6.3
+    },
+    {
+      "library": "encoding/xml",
+      "score": 5.6
+    },
+    {
+      "library": "cElementTree",
+      "score": 5.1
+    },
+    {
+      "library": "fast-xml-parser",
+      "score": 5.0
+    }
+  ]
 };
 
 
@@ -3134,15 +2177,15 @@ function escapeText(s) {
 
 function renderStats() {
   const allResults = Object.values(D.results).flatMap(op => Object.values(op).flat());
-  const fastest = allResults.reduce((a, b) => a.throughput_mbs > b.throughput_mbs ? a : b);
   const strip = document.getElementById("stats-strip");
   const langCount = new Set(D.libraries.map(l => l.lang)).size;
+  const topRanked = (D.rankings && D.rankings[0]) || { library: "N/A", score: 0 };
 
   const cells = [
     { label: "Libraries Tested", value: D.meta.lib_count, unit: "", detail: langCount + " languages" },
     { label: "Operations", value: D.meta.op_count, unit: "", detail: "parse / stream / xpath / serialize" },
     { label: "File Sizes", value: "5", unit: "", detail: "1KB to 100MB" },
-    { label: "Fastest Throughput", value: fastest.throughput_mbs, unit: "MB/s", detail: fastest.library },
+    { label: "Top Score", value: topRanked.score, unit: "/ 100", detail: topRanked.library },
   ];
 
   strip.replaceChildren();
@@ -3194,8 +2237,8 @@ function renderHeaderMeta() {
 }
 
 function renderPodium() {
-  const rows = D.results["DOM Parse"]["10MB"];
-  const top3 = rows.slice(0, 3);
+  const rankings = D.rankings || [];
+  const top3 = rankings.slice(0, 3);
   const podium = document.getElementById("podium");
   podium.replaceChildren();
 
@@ -3220,7 +2263,7 @@ function renderPodium() {
 
     const speedEl = document.createElement("div");
     speedEl.className = "podium-speed";
-    speedEl.textContent = data.throughput_mbs + " MB/s \u00b7 " + data.time_ms.toFixed(1) + " ms";
+    speedEl.textContent = "Score: " + data.score + " / 100";
 
     const barEl = document.createElement("div");
     barEl.className = "podium-bar";
