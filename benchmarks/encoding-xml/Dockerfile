@@ -1,4 +1,4 @@
-FROM golang:1.22-bookworm AS build
+FROM golang:bookworm AS build
 WORKDIR /src
 COPY go.mod main.go ./
 RUN CGO_ENABLED=0 go build -o bench .

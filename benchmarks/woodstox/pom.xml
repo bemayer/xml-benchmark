@@ -5,7 +5,7 @@
   <artifactId>woodstox-bench</artifactId>
   <version>1.0</version>
   <packaging>jar</packaging>
-  <properties><maven.compiler.source>17</maven.compiler.source><maven.compiler.target>17</maven.compiler.target></properties>
+  <properties><maven.compiler.source>21</maven.compiler.source><maven.compiler.target>21</maven.compiler.target></properties>
   <dependencies>
     <dependency><groupId>com.fasterxml.woodstox</groupId><artifactId>woodstox-core</artifactId><version>6.6.1</version></dependency>
   </dependencies>

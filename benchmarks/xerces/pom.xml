@@ -5,7 +5,7 @@
   <artifactId>xerces-bench</artifactId>
   <version>1.0</version>
   <packaging>jar</packaging>
-  <properties><maven.compiler.source>17</maven.compiler.source><maven.compiler.target>17</maven.compiler.target></properties>
+  <properties><maven.compiler.source>21</maven.compiler.source><maven.compiler.target>21</maven.compiler.target></properties>
   <build><plugins>
     <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.3.0</version>
       <configuration><archive><manifest><mainClass>bench.Bench</mainClass></manifest></archive></configuration>

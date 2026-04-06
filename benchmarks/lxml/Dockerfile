@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3-slim
 RUN apt-get update && apt-get install -y --no-install-recommends time bc && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir lxml
 COPY bench.py /usr/local/bin/bench.py

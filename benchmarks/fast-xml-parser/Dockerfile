@@ -1,9 +1,9 @@
-FROM node:20-slim AS build
+FROM node:lts-slim AS build
 WORKDIR /src
 COPY package.json ./
 RUN npm install --production
 
-FROM node:20-slim
+FROM node:lts-slim
 RUN apt-get update && apt-get install -y --no-install-recommends time bc python3 && rm -rf /var/lib/apt/lists/*
 COPY --from=build /src/node_modules /app/node_modules
 COPY bench.js /app/bench.js
