@@ -62,20 +62,25 @@ def run_benchmark(lib: dict, operation: str, data_file: str, iterations: int):
     container_results = "/results"
     container_file = f"{container_data}/{os.path.basename(data_file)}"
 
-    result = subprocess.run(
-        [
-            "docker", "run", "--rm",
-            "-v", f"{data_abs}:{container_data}:ro",
-            "-v", f"{results_abs}:{container_results}",
-            tag,
-            operation, container_file, str(iterations), container_results,
-        ],
-        capture_output=True,
-        text=True,
-        timeout=600,
-    )
-    if result.returncode != 0:
-        print(f"      WARN: {lib['name']} {operation} failed: {result.stderr[:200]}")
+    try:
+        result = subprocess.run(
+            [
+                "docker", "run", "--rm",
+                "-v", f"{data_abs}:{container_data}:ro",
+                "-v", f"{results_abs}:{container_results}",
+                tag,
+                operation, container_file, str(iterations), container_results,
+            ],
+            capture_output=True,
+            text=True,
+            timeout=600,
+        )
+        if result.returncode != 0:
+            print(f"      WARN: {lib['name']} {operation} failed: {result.stderr[:200]}")
+    except subprocess.TimeoutExpired:
+        print(f"      TIMEOUT: {lib['name']} {operation} {os.path.basename(data_file)} (>600s)")
+        # Kill any lingering container
+        subprocess.run(["docker", "kill", f"xmlbench-{lib['dir']}"], capture_output=True)
 
 
 def collect_data_files() -> list[str]:
