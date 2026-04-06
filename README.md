@@ -2,7 +2,9 @@
 
 Cross-language benchmark of the fastest XML parsing libraries. Compares **14 libraries** across **7 languages**, measuring parse speed, memory usage, and CPU time.
 
-Results are published automatically to **GitHub Pages** on the 1st of each month.
+**[View the live report](https://bemayer.github.io/xml-benchmark/)**
+
+Results are published automatically to GitHub Pages on the 1st of each month.
 
 ## Libraries
 
