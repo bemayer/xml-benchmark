@@ -440,6 +440,42 @@
   .podium-2nd .podium-bar { height: 120px; background: var(--rank-2); }
   .podium-3rd .podium-bar { height: 80px; background: var(--rank-3); }
 
+  .score-explainer {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+  }
+
+  .score-explainer strong { color: var(--text-secondary); }
+
+  .score-explainer .formula {
+    display: block;
+    margin: 0.75rem 0;
+    padding: 0.6rem 1rem;
+    background: var(--bg-surface);
+    border-left: 2px solid var(--accent);
+    color: var(--text-secondary);
+    font-size: 0.68rem;
+  }
+
+  .score-weights {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  .score-weights span {
+    color: var(--text-secondary);
+  }
+
   footer {
     border-top: 1px solid var(--border);
     padding: 2.5rem 0;
@@ -498,6 +534,7 @@
       <span class="section-tag">Aggregate Score</span>
     </div>
     <div class="podium" id="podium"></div>
+    <div class="score-explainer" id="score-explainer"></div>
   </section>
 
   <section class="animate-in delay-3">
@@ -579,7 +616,7 @@
 // ===================================================================
 const BENCHMARK_DATA = {
   "meta": {
-    "date": "2026-04-06T12:39:38.211373+00:00",
+    "date": "2026-04-06T12:42:13.828042+00:00",
     "runner": "local",
     "lib_count": 14,
     "op_count": 4
@@ -2274,6 +2311,36 @@ function renderPodium() {
   });
 }
 
+function renderScoreExplainer() {
+  const el = document.getElementById("score-explainer");
+  el.replaceChildren();
+
+  const p1 = document.createElement("p");
+  p1.innerHTML = "<strong>How is the score calculated?</strong> Each library is benchmarked across every operation and file size. " +
+    "For each cell, we compute relative speed: <em>best_time / library_time</em> (1.0 = fastest, 0.5 = twice as slow).";
+  el.appendChild(p1);
+
+  const formula = document.createElement("code");
+  formula.className = "formula";
+  formula.textContent = "score = weighted_avg(relative_speed) \u00d7 100   where weight = op_weight \u00d7 log\u2082(file_size)";
+  el.appendChild(formula);
+
+  const p2 = document.createElement("p");
+  p2.innerHTML = "Larger files weigh more (log\u2082 scale) because real-world performance matters more than micro-benchmarks. " +
+    "Libraries are <strong>not penalized</strong> for unsupported operations \u2014 they only score on what they implement.";
+  el.appendChild(p2);
+
+  const wDiv = document.createElement("div");
+  wDiv.className = "score-weights";
+  const weights = [["DOM Parse", "3\u00d7"], ["SAX/Stream", "2\u00d7"], ["XPath", "1.5\u00d7"], ["Serialize", "1\u00d7"]];
+  weights.forEach(([name, w]) => {
+    const s = document.createElement("span");
+    s.textContent = name + " " + w;
+    wDiv.appendChild(s);
+  });
+  el.appendChild(wDiv);
+}
+
 function renderPills(containerId, items, activeItem, onClick) {
   const container = document.getElementById(containerId);
   container.replaceChildren();
@@ -2453,6 +2520,7 @@ document.querySelectorAll("#results-table thead th").forEach(th => {
 renderHeaderMeta();
 renderStats();
 renderPodium();
+renderScoreExplainer();
 renderSizeFilters();
 renderOpFilters();
 renderCharts();
