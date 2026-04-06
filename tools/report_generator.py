@@ -38,18 +38,32 @@ def size_label_from_filename(filename: str) -> str:
 
 
 def build_benchmark_data(results: list[dict]) -> dict:
-    grouped = defaultdict(lambda: defaultdict(list))
+    # First pass: collect all entries per (op, size, library)
+    raw = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
     for r in results:
         op_label = OPERATION_LABELS.get(r["operation"], r["operation"])
         fname = os.path.basename(r.get("file", ""))
         size_label = size_label_from_filename(fname)
-        grouped[op_label][size_label].append({
-            "library": r["library"],
+        raw[op_label][size_label][r["library"]].append({
             "time_ms": r.get("time_ms", 0),
             "throughput_mbs": r.get("throughput_mbs", 0),
             "memory_mb": r.get("peak_rss_mb", 0),
             "cpu_ms": round(r.get("cpu_user_ms", 0) + r.get("cpu_system_ms", 0), 3),
         })
+
+    # Second pass: average across shapes (wide/deep/realworld) per library
+    grouped = defaultdict(lambda: defaultdict(list))
+    for op in raw:
+        for size in raw[op]:
+            for lib, entries in raw[op][size].items():
+                n = len(entries)
+                grouped[op][size].append({
+                    "library": lib,
+                    "time_ms": round(sum(e["time_ms"] for e in entries) / n, 3),
+                    "throughput_mbs": round(sum(e["throughput_mbs"] for e in entries) / n, 1),
+                    "memory_mb": round(sum(e["memory_mb"] for e in entries) / n, 1),
+                    "cpu_ms": round(sum(e["cpu_ms"] for e in entries) / n, 3),
+                })
 
     for op in grouped:
         for size in grouped[op]:
