@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.16)
+project(rapidxml_bench)
+set(CMAKE_CXX_STANDARD 17)
+include(FetchContent)
+FetchContent_Declare(rapidxml URL https://sourceforge.net/projects/rapidxml/files/rapidxml/rapidxml%201.13/rapidxml-1.13.zip)
+FetchContent_MakeAvailable(rapidxml)
+add_executable(bench bench.cpp)
+target_include_directories(bench PRIVATE ${rapidxml_SOURCE_DIR})

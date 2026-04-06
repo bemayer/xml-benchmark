@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.16)
+project(expat_bench)
+set(CMAKE_CXX_STANDARD 17)
+find_package(EXPAT REQUIRED)
+add_executable(bench bench.cpp)
+target_link_libraries(bench EXPAT::EXPAT)

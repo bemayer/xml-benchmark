@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.16)
+project(libxml2_bench)
+set(CMAKE_CXX_STANDARD 17)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(LIBXML2 REQUIRED libxml-2.0)
+add_executable(bench bench.cpp)
+target_include_directories(bench PRIVATE ${LIBXML2_INCLUDE_DIRS})
+target_link_libraries(bench ${LIBXML2_LIBRARIES})
