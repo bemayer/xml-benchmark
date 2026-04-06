@@ -24,7 +24,7 @@ def build_image(lib: dict) -> str:
     shutil.copy2(runner_src, runner_dst)
     print(f"  building {tag}...")
     subprocess.run(
-        ["docker", "build", "--pull", "--no-cache", "-t", tag, "."],
+        ["docker", "build", "--pull", "-t", tag, "."],
         cwd=bench_dir,
         check=True,
         capture_output=True,
