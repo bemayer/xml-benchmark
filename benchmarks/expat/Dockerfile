@@ -1,5 +1,5 @@
 FROM debian:bookworm-slim AS build
-RUN apt-get update && apt-get install -y --no-install-recommends g++ cmake libexpat1-dev && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends g++ cmake make libexpat1-dev && rm -rf /var/lib/apt/lists/*
 WORKDIR /src
 COPY CMakeLists.txt bench.cpp ./
 RUN cmake -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build -j$(nproc)

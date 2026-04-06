@@ -6,3 +6,4 @@ FetchContent_Declare(rapidxml URL https://sourceforge.net/projects/rapidxml/file
 FetchContent_MakeAvailable(rapidxml)
 add_executable(bench bench.cpp)
 target_include_directories(bench PRIVATE ${rapidxml_SOURCE_DIR})
+target_compile_options(bench PRIVATE -fpermissive)
