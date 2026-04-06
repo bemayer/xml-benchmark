@@ -2411,6 +2411,7 @@ function renderSizeFilters() {
     currentSize = s;
     renderSizeFilters();
     renderCharts();
+    renderTable();
   });
 }
 
@@ -2418,6 +2419,7 @@ function renderOpFilters() {
   renderPills("op-filters", D.operations, currentOp, op => {
     currentOp = op;
     renderOpFilters();
+    renderCharts();
     renderTable();
   });
 }
@@ -2425,7 +2427,7 @@ function renderOpFilters() {
 let charts = {};
 
 function renderCharts() {
-  const rows = D.results["DOM Parse"][currentSize] || [];
+  const rows = D.results[currentOp]?.[currentSize] || [];
   const labels = rows.map(r => r.library);
   const colors = rows.map(r => libColor(r.library));
   const colorsAlpha = colors.map(c => c + "cc");
