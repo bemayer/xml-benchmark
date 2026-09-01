@@ -1,0 +1,2588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XML Benchmark — Cross-Language Performance Report</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<style>
+  :root {
+    --bg-deep: #06080d;
+    --bg-surface: #0c1018;
+    --bg-card: #111722;
+    --bg-card-hover: #161e2c;
+    --border: #1c2536;
+    --border-glow: #00e5c830;
+    --text-primary: #e8ecf4;
+    --text-secondary: #7a8ba8;
+    --text-muted: #4a5976;
+    --accent: #00e5c8;
+    --accent-dim: #00e5c820;
+    --accent-mid: #00e5c850;
+    --hot: #ff3c6f;
+    --hot-dim: #ff3c6f20;
+    --warm: #ffb340;
+    --warm-dim: #ffb34020;
+    --cool: #5b7fff;
+    --cool-dim: #5b7fff20;
+    --rank-1: #00e5c8;
+    --rank-2: #5b7fff;
+    --rank-3: #ffb340;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'Instrument Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: -40%;
+    left: -20%;
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(ellipse, var(--accent-dim) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  header {
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+
+  .header-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .header-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    letter-spacing: 0.04em;
+    line-height: 0.95;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  h1 span { color: var(--accent); }
+
+  .header-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  .meta-item {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .meta-item strong { color: var(--text-secondary); }
+
+  .stats-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 3rem;
+  }
+
+  .stat-cell {
+    background: var(--bg-card);
+    padding: 1.5rem 1.75rem;
+    transition: background 0.2s;
+  }
+
+  .stat-cell:hover { background: var(--bg-card-hover); }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .stat-value .unit {
+    font-size: 0.5em;
+    color: var(--text-muted);
+    margin-left: 0.15em;
+  }
+
+  .stat-detail {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    margin-top: 0.35rem;
+  }
+
+  section { margin-bottom: 4rem; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-number {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--accent);
+    opacity: 0.5;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 0.06em;
+    color: var(--text-primary);
+  }
+
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.75rem;
+    border-radius: 3px;
+    margin-left: auto;
+  }
+
+  .chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(620px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .chart-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .chart-card:hover { border-color: var(--border-glow); }
+
+  .chart-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .chart-card:hover::before { opacity: 1; }
+
+  .chart-title {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .chart-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .chart-wrap { position: relative; height: 320px; }
+
+  .filter-bar {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .pill {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+  }
+
+  .pill:hover { border-color: var(--accent); color: var(--accent); }
+  .pill.active { background: var(--accent-dim); border-color: var(--accent-mid); color: var(--accent); }
+
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: var(--bg-card);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+
+  thead th {
+    position: sticky;
+    top: 0;
+    background: var(--bg-surface);
+    padding: 1rem 1.25rem;
+    text-align: left;
+    font-weight: 500;
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+
+  thead th:hover { color: var(--accent); }
+  thead th.sorted-asc::after { content: ' \25B2'; color: var(--accent); }
+  thead th.sorted-desc::after { content: ' \25BC'; color: var(--accent); }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--bg-card-hover); }
+
+  td {
+    padding: 0.85rem 1.25rem;
+    white-space: nowrap;
+    color: var(--text-secondary);
+  }
+
+  td:first-child { color: var(--text-primary); font-weight: 500; }
+
+  .lang-badge {
+    display: inline-block;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.55rem;
+    border-radius: 4px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+
+  .lang-cpp { background: var(--cool-dim); color: var(--cool); }
+  .lang-java { background: var(--hot-dim); color: var(--hot); }
+  .lang-python { background: var(--warm-dim); color: var(--warm); }
+  .lang-rust { background: #ff6e4020; color: #ff6e40; }
+  .lang-csharp { background: #b47eff20; color: #b47eff; }
+  .lang-go { background: #00d1b220; color: #00d1b2; }
+  .lang-js { background: #ffe04020; color: #ffe040; }
+
+  .rank-medal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 0.65rem;
+    font-weight: 700;
+    margin-right: 0.5rem;
+  }
+
+  .rank-1 { background: var(--rank-1); color: var(--bg-deep); }
+  .rank-2 { background: var(--rank-2); color: var(--bg-deep); }
+  .rank-3 { background: var(--rank-3); color: var(--bg-deep); }
+
+  .bar-cell { position: relative; min-width: 180px; }
+
+  .bar-bg {
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    height: 6px;
+    border-radius: 3px;
+    opacity: 0.35;
+    transition: width 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .bar-value { position: relative; z-index: 1; }
+
+  .podium {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+  }
+
+  .podium-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .podium-name {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin-bottom: 0.35rem;
+  }
+
+  .podium-speed {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .podium-bar {
+    width: 120px;
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 1rem;
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--bg-deep);
+  }
+
+  .podium-1st .podium-bar { height: 160px; background: var(--rank-1); }
+  .podium-2nd .podium-bar { height: 120px; background: var(--rank-2); }
+  .podium-3rd .podium-bar { height: 80px; background: var(--rank-3); }
+
+  .score-explainer {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+  }
+
+  .score-explainer strong { color: var(--text-secondary); }
+
+  .score-explainer .formula {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+    padding: 1rem 1.5rem;
+    background: var(--bg-surface);
+    border-left: 2px solid var(--accent);
+    border-radius: 2px;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    overflow-x: auto;
+  }
+
+  .score-explainer .katex { color: var(--text-primary); }
+
+  .score-weights {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  .score-weights span {
+    color: var(--text-secondary);
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 0;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  footer p {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-in { opacity: 0; animation: fadeUp 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+
+  @media (max-width: 700px) {
+    .chart-grid { grid-template-columns: 1fr; }
+    .podium { flex-direction: row; flex-wrap: wrap; }
+    .podium-bar { width: 80px; }
+    h1 { font-size: 2.5rem; }
+    .container { padding: 0 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="animate-in">
+    <div class="header-eyebrow">Cross-Language Performance Report</div>
+    <h1>XML <span>BENCHMARK</span></h1>
+    <div class="header-meta" id="header-meta"></div>
+  </header>
+
+  <div class="stats-strip animate-in delay-1" id="stats-strip"></div>
+
+  <section class="animate-in delay-2">
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <h2>FASTEST OVERALL</h2>
+      <span class="section-tag">Aggregate Score</span>
+    </div>
+    <div class="podium" id="podium"></div>
+    <div class="score-explainer" id="score-explainer"></div>
+  </section>
+
+  <section class="animate-in delay-3">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <h2>DOM PARSE</h2>
+      <span class="section-tag">Time &amp; Throughput</span>
+    </div>
+    <div class="filter-bar" id="size-filters"></div>
+    <div class="chart-grid">
+      <div class="chart-card">
+        <div class="chart-title">Parse Time by Library</div>
+        <div class="chart-subtitle">Lower is better &middot; Median of N runs</div>
+        <div class="chart-wrap"><canvas id="chart-parse-time"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Throughput</div>
+        <div class="chart-subtitle">Higher is better &middot; MB/s</div>
+        <div class="chart-wrap"><canvas id="chart-throughput"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <h2>RESOURCE USAGE</h2>
+      <span class="section-tag">Memory &amp; CPU</span>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-card">
+        <div class="chart-title">Peak RSS Memory</div>
+        <div class="chart-subtitle">Lower is better &middot; MB</div>
+        <div class="chart-wrap"><canvas id="chart-memory"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">CPU Time</div>
+        <div class="chart-subtitle">User + System &middot; ms</div>
+        <div class="chart-wrap"><canvas id="chart-cpu"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <span class="section-number">04</span>
+      <h2>FULL RESULTS</h2>
+      <span class="section-tag">All metrics</span>
+    </div>
+    <div class="filter-bar" id="op-filters"></div>
+    <div class="table-wrap">
+      <table id="results-table">
+        <thead>
+          <tr>
+            <th data-sort="rank">#</th>
+            <th data-sort="library">Library</th>
+            <th data-sort="language">Language</th>
+            <th data-sort="time">Time (ms)</th>
+            <th data-sort="throughput">Throughput</th>
+            <th data-sort="memory">Peak RSS (MB)</th>
+            <th data-sort="cpu">CPU (ms)</th>
+          </tr>
+        </thead>
+        <tbody id="results-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <p>XML Benchmark Suite &middot; <a href="https://github.com/bemayer/xml-benchmark">View on GitHub</a></p>
+    <p>Automated via GitHub Actions &middot; Runs 1st of each month</p>
+  </footer>
+
+</div>
+
+<script>
+// ===================================================================
+// BENCHMARK DATA — Injected by report_generator.py
+// ===================================================================
+const BENCHMARK_DATA = {
+  "meta": {
+    "date": "2026-09-01T04:26:54.048690+00:00",
+    "runner": "ubuntu-latest / GitHub Actions",
+    "lib_count": 14,
+    "op_count": 4
+  },
+  "sizes": [
+    "1KB",
+    "100KB",
+    "1MB",
+    "10MB",
+    "100MB"
+  ],
+  "operations": [
+    "DOM Parse",
+    "SAX/Stream",
+    "XPath Query",
+    "Serialize"
+  ],
+  "libraries": [
+    {
+      "name": "pugixml",
+      "lang": "C++",
+      "langClass": "cpp"
+    },
+    {
+      "name": "RapidXML",
+      "lang": "C++",
+      "langClass": "cpp"
+    },
+    {
+      "name": "Expat",
+      "lang": "C++",
+      "langClass": "cpp"
+    },
+    {
+      "name": "libxml2",
+      "lang": "C++",
+      "langClass": "cpp"
+    },
+    {
+      "name": "VTD-XML",
+      "lang": "Java",
+      "langClass": "java"
+    },
+    {
+      "name": "Xerces",
+      "lang": "Java",
+      "langClass": "java"
+    },
+    {
+      "name": "Woodstox",
+      "lang": "Java",
+      "langClass": "java"
+    },
+    {
+      "name": "lxml",
+      "lang": "Python",
+      "langClass": "python"
+    },
+    {
+      "name": "cElementTree",
+      "lang": "Python",
+      "langClass": "python"
+    },
+    {
+      "name": "quick-xml",
+      "lang": "Rust",
+      "langClass": "rust"
+    },
+    {
+      "name": "roxmltree",
+      "lang": "Rust",
+      "langClass": "rust"
+    },
+    {
+      "name": "System.Xml",
+      "lang": "C#",
+      "langClass": "csharp"
+    },
+    {
+      "name": "encoding/xml",
+      "lang": "Go",
+      "langClass": "go"
+    },
+    {
+      "name": "fast-xml-parser",
+      "lang": "JS",
+      "langClass": "js"
+    }
+  ],
+  "results": {
+    "DOM Parse": {
+      "100KB": [
+        {
+          "library": "quick-xml",
+          "time_ms": 0.332,
+          "throughput_mbs": 8610.4,
+          "memory_mb": 4.7,
+          "cpu_ms": 5.0
+        },
+        {
+          "library": "VTD-XML",
+          "time_ms": 0.542,
+          "throughput_mbs": 180.3,
+          "memory_mb": 68.3,
+          "cpu_ms": 310.0
+        },
+        {
+          "library": "lxml",
+          "time_ms": 0.671,
+          "throughput_mbs": 145.6,
+          "memory_mb": 18.0,
+          "cpu_ms": 90.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 0.871,
+          "throughput_mbs": 3277.1,
+          "memory_mb": 12.1,
+          "cpu_ms": 50.0
+        },
+        {
+          "library": "pugixml",
+          "time_ms": 1.266,
+          "throughput_mbs": 2254.6,
+          "memory_mb": 9.8,
+          "cpu_ms": 5.0
+        },
+        {
+          "library": "RapidXML",
+          "time_ms": 1.415,
+          "throughput_mbs": 2017.2,
+          "memory_mb": 12.7,
+          "cpu_ms": 5.0
+        },
+        {
+          "library": "roxmltree",
+          "time_ms": 3.115,
+          "throughput_mbs": 916.2,
+          "memory_mb": 7.1,
+          "cpu_ms": 30.0
+        },
+        {
+          "library": "fast-xml-parser",
+          "time_ms": 3.798,
+          "throughput_mbs": 25.7,
+          "memory_mb": 98.1,
+          "cpu_ms": 640.0
+        },
+        {
+          "library": "cElementTree",
+          "time_ms": 4.507,
+          "throughput_mbs": 633.2,
+          "memory_mb": 23.9,
+          "cpu_ms": 160.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 5.824,
+          "throughput_mbs": 490.1,
+          "memory_mb": 100.7,
+          "cpu_ms": 650.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 11.407,
+          "throughput_mbs": 250.2,
+          "memory_mb": 64.4,
+          "cpu_ms": 195.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 23.432,
+          "throughput_mbs": 121.8,
+          "memory_mb": 12.3,
+          "cpu_ms": 185.0
+        }
+      ],
+      "100MB": [
+        {
+          "library": "quick-xml",
+          "time_ms": 64.406,
+          "throughput_mbs": 1619.1,
+          "memory_mb": 106.1,
+          "cpu_ms": 75.0
+        },
+        {
+          "library": "pugixml",
+          "time_ms": 112.874,
+          "throughput_mbs": 923.8,
+          "memory_mb": 324.2,
+          "cpu_ms": 185.0
+        },
+        {
+          "library": "RapidXML",
+          "time_ms": 163.388,
+          "throughput_mbs": 638.2,
+          "memory_mb": 424.2,
+          "cpu_ms": 235.0
+        },
+        {
+          "library": "VTD-XML",
+          "time_ms": 238.903,
+          "throughput_mbs": 454.4,
+          "memory_mb": 633.3,
+          "cpu_ms": 900.0
+        },
+        {
+          "library": "roxmltree",
+          "time_ms": 247.647,
+          "throughput_mbs": 421.1,
+          "memory_mb": 334.9,
+          "cpu_ms": 270.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 488.954,
+          "throughput_mbs": 213.3,
+          "memory_mb": 995.1,
+          "cpu_ms": 2440.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 646.685,
+          "throughput_mbs": 161.2,
+          "memory_mb": 933.7,
+          "cpu_ms": 1255.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 753.972,
+          "throughput_mbs": 138.3,
+          "memory_mb": 640.9,
+          "cpu_ms": 2035.0
+        },
+        {
+          "library": "cElementTree",
+          "time_ms": 958.517,
+          "throughput_mbs": 108.8,
+          "memory_mb": 616.0,
+          "cpu_ms": 1070.0
+        },
+        {
+          "library": "lxml",
+          "time_ms": 1043.81,
+          "throughput_mbs": 104.0,
+          "memory_mb": 1288.8,
+          "cpu_ms": 1610.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 1175.209,
+          "throughput_mbs": 88.7,
+          "memory_mb": 165.7,
+          "cpu_ms": 1210.0
+        },
+        {
+          "library": "fast-xml-parser",
+          "time_ms": 3947.814,
+          "throughput_mbs": 27.5,
+          "memory_mb": 1497.6,
+          "cpu_ms": 10590.0
+        }
+      ],
+      "10MB": [
+        {
+          "library": "quick-xml",
+          "time_ms": 7.851,
+          "throughput_mbs": 3721.3,
+          "memory_mb": 31.2,
+          "cpu_ms": 30.0
+        },
+        {
+          "library": "pugixml",
+          "time_ms": 18.549,
+          "throughput_mbs": 1575.1,
+          "memory_mb": 73.4,
+          "cpu_ms": 55.0
+        },
+        {
+          "library": "VTD-XML",
+          "time_ms": 21.45,
+          "throughput_mbs": 492.9,
+          "memory_mb": 168.5,
+          "cpu_ms": 760.0
+        },
+        {
+          "library": "RapidXML",
+          "time_ms": 26.93,
+          "throughput_mbs": 1084.9,
+          "memory_mb": 102.6,
+          "cpu_ms": 80.0
+        },
+        {
+          "library": "roxmltree",
+          "time_ms": 43.89,
+          "throughput_mbs": 665.7,
+          "memory_mb": 85.6,
+          "cpu_ms": 120.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 66.409,
+          "throughput_mbs": 440.0,
+          "memory_mb": 442.6,
+          "cpu_ms": 1210.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 104.783,
+          "throughput_mbs": 278.8,
+          "memory_mb": 138.8,
+          "cpu_ms": 575.0
+        },
+        {
+          "library": "lxml",
+          "time_ms": 107.759,
+          "throughput_mbs": 98.1,
+          "memory_mb": 143.8,
+          "cpu_ms": 620.0
+        },
+        {
+          "library": "cElementTree",
+          "time_ms": 116.468,
+          "throughput_mbs": 250.9,
+          "memory_mb": 132.4,
+          "cpu_ms": 525.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 178.847,
+          "throughput_mbs": 163.4,
+          "memory_mb": 208.9,
+          "cpu_ms": 985.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 267.343,
+          "throughput_mbs": 109.3,
+          "memory_mb": 41.5,
+          "cpu_ms": 585.0
+        },
+        {
+          "library": "fast-xml-parser",
+          "time_ms": 391.486,
+          "throughput_mbs": 27.0,
+          "memory_mb": 525.4,
+          "cpu_ms": 5270.0
+        }
+      ],
+      "1KB": [
+        {
+          "library": "pugixml",
+          "time_ms": 0.001,
+          "throughput_mbs": 1977.9,
+          "memory_mb": 3.8,
+          "cpu_ms": 0.0
+        },
+        {
+          "library": "RapidXML",
+          "time_ms": 0.001,
+          "throughput_mbs": 989.0,
+          "memory_mb": 3.5,
+          "cpu_ms": 0.0
+        },
+        {
+          "library": "quick-xml",
+          "time_ms": 0.002,
+          "throughput_mbs": 659.3,
+          "memory_mb": 1.9,
+          "cpu_ms": 0.0
+        },
+        {
+          "library": "roxmltree",
+          "time_ms": 0.004,
+          "throughput_mbs": 282.6,
+          "memory_mb": 2.0,
+          "cpu_ms": 0.0
+        },
+        {
+          "library": "lxml",
+          "time_ms": 0.009,
+          "throughput_mbs": 104.1,
+          "memory_mb": 17.1,
+          "cpu_ms": 30.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 0.013,
+          "throughput_mbs": 79.1,
+          "memory_mb": 5.4,
+          "cpu_ms": 0.0
+        },
+        {
+          "library": "cElementTree",
+          "time_ms": 0.015,
+          "throughput_mbs": 65.9,
+          "memory_mb": 15.7,
+          "cpu_ms": 90.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 0.015,
+          "throughput_mbs": 63.8,
+          "memory_mb": 40.0,
+          "cpu_ms": 35.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 0.019,
+          "throughput_mbs": 53.5,
+          "memory_mb": 8.4,
+          "cpu_ms": 5.0
+        },
+        {
+          "library": "VTD-XML",
+          "time_ms": 0.036,
+          "throughput_mbs": 27.5,
+          "memory_mb": 57.0,
+          "cpu_ms": 175.0
+        },
+        {
+          "library": "fast-xml-parser",
+          "time_ms": 0.078,
+          "throughput_mbs": 12.7,
+          "memory_mb": 64.7,
+          "cpu_ms": 125.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 0.232,
+          "throughput_mbs": 4.3,
+          "memory_mb": 73.5,
+          "cpu_ms": 505.0
+        }
+      ],
+      "1MB": [
+        {
+          "library": "quick-xml",
+          "time_ms": 2.715,
+          "throughput_mbs": 9002.3,
+          "memory_mb": 26.3,
+          "cpu_ms": 15.0
+        },
+        {
+          "library": "VTD-XML",
+          "time_ms": 3.439,
+          "throughput_mbs": 299.2,
+          "memory_mb": 101.4,
+          "cpu_ms": 370.0
+        },
+        {
+          "library": "lxml",
+          "time_ms": 7.301,
+          "throughput_mbs": 140.9,
+          "memory_mb": 29.4,
+          "cpu_ms": 170.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 10.788,
+          "throughput_mbs": 2265.9,
+          "memory_mb": 62.2,
+          "cpu_ms": 155.0
+        },
+        {
+          "library": "pugixml",
+          "time_ms": 12.421,
+          "throughput_mbs": 1968.1,
+          "memory_mb": 54.3,
+          "cpu_ms": 30.0
+        },
+        {
+          "library": "RapidXML",
+          "time_ms": 20.159,
+          "throughput_mbs": 1212.7,
+          "memory_mb": 78.6,
+          "cpu_ms": 50.0
+        },
+        {
+          "library": "roxmltree",
+          "time_ms": 27.179,
+          "throughput_mbs": 899.4,
+          "memory_mb": 38.8,
+          "cpu_ms": 65.0
+        },
+        {
+          "library": "fast-xml-parser",
+          "time_ms": 40.308,
+          "throughput_mbs": 25.5,
+          "memory_mb": 264.0,
+          "cpu_ms": 1500.0
+        },
+        {
+          "library": "cElementTree",
+          "time_ms": 45.856,
+          "throughput_mbs": 533.1,
+          "memory_mb": 92.2,
+          "cpu_ms": 275.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 49.189,
+          "throughput_mbs": 497.0,
+          "memory_mb": 237.3,
+          "cpu_ms": 810.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 142.073,
+          "throughput_mbs": 172.1,
+          "memory_mb": 185.1,
+          "cpu_ms": 515.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 192.924,
+          "throughput_mbs": 126.7,
+          "memory_mb": 31.6,
+          "cpu_ms": 350.0
+        }
+      ],
+      "other": [
+        {
+          "library": "quick-xml",
+          "time_ms": 13.979,
+          "throughput_mbs": 715.3,
+          "memory_mb": 11.9,
+          "cpu_ms": 70.0
+        },
+        {
+          "library": "pugixml",
+          "time_ms": 16.738,
+          "throughput_mbs": 597.5,
+          "memory_mb": 50.1,
+          "cpu_ms": 85.0
+        },
+        {
+          "library": "RapidXML",
+          "time_ms": 20.08,
+          "throughput_mbs": 498.0,
+          "memory_mb": 66.7,
+          "cpu_ms": 100.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 75.457,
+          "throughput_mbs": 132.5,
+          "memory_mb": 21.5,
+          "cpu_ms": 385.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 203.184,
+          "throughput_mbs": 49.2,
+          "memory_mb": 187.0,
+          "cpu_ms": 1070.0
+        },
+        {
+          "library": "fast-xml-parser",
+          "time_ms": 467.451,
+          "throughput_mbs": 21.4,
+          "memory_mb": 589.9,
+          "cpu_ms": 6540.0
+        }
+      ]
+    },
+    "XPath Query": {
+      "100KB": [
+        {
+          "library": "pugixml",
+          "time_ms": 0.032,
+          "throughput_mbs": 90613.7,
+          "memory_mb": 9.5,
+          "cpu_ms": 0.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 0.126,
+          "throughput_mbs": 775.4,
+          "memory_mb": 6.7,
+          "cpu_ms": 10.0
+        },
+        {
+          "library": "lxml",
+          "time_ms": 0.159,
+          "throughput_mbs": 614.5,
+          "memory_mb": 18.1,
+          "cpu_ms": 40.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 0.457,
+          "throughput_mbs": 6245.8,
+          "memory_mb": 50.2,
+          "cpu_ms": 65.0
+        },
+        {
+          "library": "VTD-XML",
+          "time_ms": 0.907,
+          "throughput_mbs": 107.7,
+          "memory_mb": 71.0,
+          "cpu_ms": 490.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 4.018,
+          "throughput_mbs": 710.4,
+          "memory_mb": 132.1,
+          "cpu_ms": 730.0
+        }
+      ],
+      "100MB": [
+        {
+          "library": "pugixml",
+          "time_ms": 52.933,
+          "throughput_mbs": 1970.0,
+          "memory_mb": 350.0,
+          "cpu_ms": 235.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 440.609,
+          "throughput_mbs": 236.7,
+          "memory_mb": 553.0,
+          "cpu_ms": 1695.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 565.64,
+          "throughput_mbs": 191.9,
+          "memory_mb": 1660.3,
+          "cpu_ms": 3010.0
+        },
+        {
+          "library": "lxml",
+          "time_ms": 611.89,
+          "throughput_mbs": 177.4,
+          "memory_mb": 1334.8,
+          "cpu_ms": 2240.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 2044.525,
+          "throughput_mbs": 51.0,
+          "memory_mb": 2374.2,
+          "cpu_ms": 9560.0
+        },
+        {
+          "library": "VTD-XML",
+          "time_ms": 3837.515,
+          "throughput_mbs": 28.3,
+          "memory_mb": 532.6,
+          "cpu_ms": 8940.0
+        }
+      ],
+      "10MB": [
+        {
+          "library": "pugixml",
+          "time_ms": 2.802,
+          "throughput_mbs": 10427.3,
+          "memory_mb": 75.0,
+          "cpu_ms": 45.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 22.393,
+          "throughput_mbs": 1304.8,
+          "memory_mb": 175.8,
+          "cpu_ms": 350.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 42.573,
+          "throughput_mbs": 248.3,
+          "memory_mb": 171.2,
+          "cpu_ms": 450.0
+        },
+        {
+          "library": "lxml",
+          "time_ms": 44.12,
+          "throughput_mbs": 239.6,
+          "memory_mb": 150.7,
+          "cpu_ms": 390.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 56.445,
+          "throughput_mbs": 517.6,
+          "memory_mb": 634.1,
+          "cpu_ms": 2010.0
+        },
+        {
+          "library": "VTD-XML",
+          "time_ms": 392.963,
+          "throughput_mbs": 26.9,
+          "memory_mb": 112.7,
+          "cpu_ms": 4550.0
+        }
+      ],
+      "1KB": [
+        {
+          "library": "pugixml",
+          "time_ms": 0.0,
+          "throughput_mbs": 0,
+          "memory_mb": 3.7,
+          "cpu_ms": 0.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 0.005,
+          "throughput_mbs": 219.8,
+          "memory_mb": 5.6,
+          "cpu_ms": 0.0
+        },
+        {
+          "library": "lxml",
+          "time_ms": 0.005,
+          "throughput_mbs": 179.8,
+          "memory_mb": 17.0,
+          "cpu_ms": 25.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 0.007,
+          "throughput_mbs": 152.1,
+          "memory_mb": 37.4,
+          "cpu_ms": 30.0
+        },
+        {
+          "library": "VTD-XML",
+          "time_ms": 0.086,
+          "throughput_mbs": 11.5,
+          "memory_mb": 72.1,
+          "cpu_ms": 305.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 0.166,
+          "throughput_mbs": 6.0,
+          "memory_mb": 164.6,
+          "cpu_ms": 400.0
+        }
+      ],
+      "1MB": [
+        {
+          "library": "pugixml",
+          "time_ms": 0.256,
+          "throughput_mbs": 95678.4,
+          "memory_mb": 54.1,
+          "cpu_ms": 20.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 2.509,
+          "throughput_mbs": 410.0,
+          "memory_mb": 22.0,
+          "cpu_ms": 60.0
+        },
+        {
+          "library": "lxml",
+          "time_ms": 2.81,
+          "throughput_mbs": 366.1,
+          "memory_mb": 30.2,
+          "cpu_ms": 90.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 3.077,
+          "throughput_mbs": 7943.4,
+          "memory_mb": 131.8,
+          "cpu_ms": 210.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 22.886,
+          "throughput_mbs": 1068.2,
+          "memory_mb": 246.6,
+          "cpu_ms": 1320.0
+        },
+        {
+          "library": "VTD-XML",
+          "time_ms": 36.943,
+          "throughput_mbs": 27.8,
+          "memory_mb": 76.9,
+          "cpu_ms": 1450.0
+        }
+      ],
+      "other": [
+        {
+          "library": "pugixml",
+          "time_ms": 5.507,
+          "throughput_mbs": 1815.9,
+          "memory_mb": 57.0,
+          "cpu_ms": 45.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 73.146,
+          "throughput_mbs": 136.7,
+          "memory_mb": 157.3,
+          "cpu_ms": 590.0
+        }
+      ]
+    },
+    "Serialize": {
+      "100KB": [
+        {
+          "library": "libxml2",
+          "time_ms": 0.142,
+          "throughput_mbs": 20100.9,
+          "memory_mb": 12.2,
+          "cpu_ms": 15.0
+        },
+        {
+          "library": "lxml",
+          "time_ms": 0.267,
+          "throughput_mbs": 365.9,
+          "memory_mb": 18.3,
+          "cpu_ms": 50.0
+        },
+        {
+          "library": "quick-xml",
+          "time_ms": 0.761,
+          "throughput_mbs": 3748.3,
+          "memory_mb": 12.9,
+          "cpu_ms": 0.0
+        },
+        {
+          "library": "RapidXML",
+          "time_ms": 1.065,
+          "throughput_mbs": 2680.1,
+          "memory_mb": 13.1,
+          "cpu_ms": 10.0
+        },
+        {
+          "library": "pugixml",
+          "time_ms": 1.444,
+          "throughput_mbs": 1976.0,
+          "memory_mb": 12.9,
+          "cpu_ms": 10.0
+        },
+        {
+          "library": "cElementTree",
+          "time_ms": 2.062,
+          "throughput_mbs": 47.4,
+          "memory_mb": 15.8,
+          "cpu_ms": 290.0
+        },
+        {
+          "library": "fast-xml-parser",
+          "time_ms": 2.167,
+          "throughput_mbs": 45.1,
+          "memory_mb": 76.8,
+          "cpu_ms": 360.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 9.138,
+          "throughput_mbs": 312.4,
+          "memory_mb": 152.5,
+          "cpu_ms": 970.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 9.842,
+          "throughput_mbs": 290.0,
+          "memory_mb": 29.1,
+          "cpu_ms": 140.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 10.429,
+          "throughput_mbs": 273.7,
+          "memory_mb": 123.4,
+          "cpu_ms": 190.0
+        }
+      ],
+      "100MB": [
+        {
+          "library": "quick-xml",
+          "time_ms": 65.916,
+          "throughput_mbs": 1581.9,
+          "memory_mb": 462.4,
+          "cpu_ms": 295.0
+        },
+        {
+          "library": "pugixml",
+          "time_ms": 98.931,
+          "throughput_mbs": 1054.0,
+          "memory_mb": 481.7,
+          "cpu_ms": 275.0
+        },
+        {
+          "library": "RapidXML",
+          "time_ms": 119.512,
+          "throughput_mbs": 872.5,
+          "memory_mb": 500.9,
+          "cpu_ms": 345.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 189.213,
+          "throughput_mbs": 551.1,
+          "memory_mb": 996.0,
+          "cpu_ms": 1440.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 359.427,
+          "throughput_mbs": 290.1,
+          "memory_mb": 1192.0,
+          "cpu_ms": 2205.0
+        },
+        {
+          "library": "lxml",
+          "time_ms": 392.036,
+          "throughput_mbs": 276.9,
+          "memory_mb": 1506.5,
+          "cpu_ms": 1990.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 666.839,
+          "throughput_mbs": 156.4,
+          "memory_mb": 823.2,
+          "cpu_ms": 3100.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 1303.343,
+          "throughput_mbs": 83.3,
+          "memory_mb": 1707.3,
+          "cpu_ms": 7370.0
+        },
+        {
+          "library": "cElementTree",
+          "time_ms": 2389.748,
+          "throughput_mbs": 45.4,
+          "memory_mb": 1022.1,
+          "cpu_ms": 4220.0
+        },
+        {
+          "library": "fast-xml-parser",
+          "time_ms": 3009.722,
+          "throughput_mbs": 36.1,
+          "memory_mb": 1850.9,
+          "cpu_ms": 11890.0
+        }
+      ],
+      "10MB": [
+        {
+          "library": "quick-xml",
+          "time_ms": 12.957,
+          "throughput_mbs": 2255.0,
+          "memory_mb": 106.3,
+          "cpu_ms": 60.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 17.313,
+          "throughput_mbs": 1687.6,
+          "memory_mb": 143.0,
+          "cpu_ms": 220.0
+        },
+        {
+          "library": "RapidXML",
+          "time_ms": 20.365,
+          "throughput_mbs": 1434.7,
+          "memory_mb": 121.6,
+          "cpu_ms": 90.0
+        },
+        {
+          "library": "pugixml",
+          "time_ms": 23.299,
+          "throughput_mbs": 1254.0,
+          "memory_mb": 111.4,
+          "cpu_ms": 80.0
+        },
+        {
+          "library": "lxml",
+          "time_ms": 37.088,
+          "throughput_mbs": 285.1,
+          "memory_mb": 166.3,
+          "cpu_ms": 360.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 110.473,
+          "throughput_mbs": 95.7,
+          "memory_mb": 389.6,
+          "cpu_ms": 3000.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 113.157,
+          "throughput_mbs": 258.2,
+          "memory_mb": 368.9,
+          "cpu_ms": 725.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 114.38,
+          "throughput_mbs": 255.4,
+          "memory_mb": 220.8,
+          "cpu_ms": 755.0
+        },
+        {
+          "library": "cElementTree",
+          "time_ms": 217.798,
+          "throughput_mbs": 48.5,
+          "memory_mb": 115.0,
+          "cpu_ms": 1330.0
+        },
+        {
+          "library": "fast-xml-parser",
+          "time_ms": 265.586,
+          "throughput_mbs": 39.8,
+          "memory_mb": 468.3,
+          "cpu_ms": 3590.0
+        }
+      ],
+      "1KB": [
+        {
+          "library": "pugixml",
+          "time_ms": 0.001,
+          "throughput_mbs": 989.0,
+          "memory_mb": 3.7,
+          "cpu_ms": 0.0
+        },
+        {
+          "library": "quick-xml",
+          "time_ms": 0.001,
+          "throughput_mbs": 989.0,
+          "memory_mb": 1.9,
+          "cpu_ms": 0.0
+        },
+        {
+          "library": "RapidXML",
+          "time_ms": 0.002,
+          "throughput_mbs": 659.3,
+          "memory_mb": 3.5,
+          "cpu_ms": 0.0
+        },
+        {
+          "library": "lxml",
+          "time_ms": 0.003,
+          "throughput_mbs": 395.6,
+          "memory_mb": 17.0,
+          "cpu_ms": 25.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 0.004,
+          "throughput_mbs": 282.6,
+          "memory_mb": 5.7,
+          "cpu_ms": 0.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 0.013,
+          "throughput_mbs": 76.1,
+          "memory_mb": 9.3,
+          "cpu_ms": 0.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 0.014,
+          "throughput_mbs": 68.2,
+          "memory_mb": 44.6,
+          "cpu_ms": 40.0
+        },
+        {
+          "library": "cElementTree",
+          "time_ms": 0.028,
+          "throughput_mbs": 36.0,
+          "memory_mb": 15.6,
+          "cpu_ms": 90.0
+        },
+        {
+          "library": "fast-xml-parser",
+          "time_ms": 0.038,
+          "throughput_mbs": 25.7,
+          "memory_mb": 61.9,
+          "cpu_ms": 60.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 0.096,
+          "throughput_mbs": 10.4,
+          "memory_mb": 66.0,
+          "cpu_ms": 385.0
+        }
+      ],
+      "1MB": [
+        {
+          "library": "libxml2",
+          "time_ms": 1.581,
+          "throughput_mbs": 15467.1,
+          "memory_mb": 62.1,
+          "cpu_ms": 50.0
+        },
+        {
+          "library": "lxml",
+          "time_ms": 2.429,
+          "throughput_mbs": 423.6,
+          "memory_mb": 31.9,
+          "cpu_ms": 80.0
+        },
+        {
+          "library": "quick-xml",
+          "time_ms": 8.264,
+          "throughput_mbs": 2958.3,
+          "memory_mb": 77.5,
+          "cpu_ms": 30.0
+        },
+        {
+          "library": "RapidXML",
+          "time_ms": 13.097,
+          "throughput_mbs": 1866.5,
+          "memory_mb": 84.0,
+          "cpu_ms": 55.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 13.849,
+          "throughput_mbs": 74.3,
+          "memory_mb": 142.0,
+          "cpu_ms": 1690.0
+        },
+        {
+          "library": "pugixml",
+          "time_ms": 16.324,
+          "throughput_mbs": 1497.5,
+          "memory_mb": 79.9,
+          "cpu_ms": 55.0
+        },
+        {
+          "library": "cElementTree",
+          "time_ms": 20.844,
+          "throughput_mbs": 49.4,
+          "memory_mb": 24.3,
+          "cpu_ms": 510.0
+        },
+        {
+          "library": "fast-xml-parser",
+          "time_ms": 24.229,
+          "throughput_mbs": 42.5,
+          "memory_mb": 140.1,
+          "cpu_ms": 880.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 69.277,
+          "throughput_mbs": 352.9,
+          "memory_mb": 152.8,
+          "cpu_ms": 420.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 96.812,
+          "throughput_mbs": 252.5,
+          "memory_mb": 283.0,
+          "cpu_ms": 490.0
+        }
+      ],
+      "other": [
+        {
+          "library": "quick-xml",
+          "time_ms": 11.551,
+          "throughput_mbs": 865.7,
+          "memory_mb": 67.4,
+          "cpu_ms": 95.0
+        },
+        {
+          "library": "pugixml",
+          "time_ms": 14.133,
+          "throughput_mbs": 707.6,
+          "memory_mb": 77.6,
+          "cpu_ms": 90.0
+        },
+        {
+          "library": "RapidXML",
+          "time_ms": 17.898,
+          "throughput_mbs": 558.7,
+          "memory_mb": 91.1,
+          "cpu_ms": 110.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 20.037,
+          "throughput_mbs": 499.1,
+          "memory_mb": 182.0,
+          "cpu_ms": 365.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 54.907,
+          "throughput_mbs": 182.1,
+          "memory_mb": 78.8,
+          "cpu_ms": 535.0
+        },
+        {
+          "library": "fast-xml-parser",
+          "time_ms": 160.576,
+          "throughput_mbs": 62.3,
+          "memory_mb": 331.0,
+          "cpu_ms": 2700.0
+        }
+      ]
+    },
+    "SAX/Stream": {
+      "100KB": [
+        {
+          "library": "quick-xml",
+          "time_ms": 0.348,
+          "throughput_mbs": 8202.1,
+          "memory_mb": 4.7,
+          "cpu_ms": 5.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 0.47,
+          "throughput_mbs": 6073.0,
+          "memory_mb": 12.2,
+          "cpu_ms": 15.0
+        },
+        {
+          "library": "Woodstox",
+          "time_ms": 0.784,
+          "throughput_mbs": 124.6,
+          "memory_mb": 56.1,
+          "cpu_ms": 380.0
+        },
+        {
+          "library": "Expat",
+          "time_ms": 1.956,
+          "throughput_mbs": 1458.9,
+          "memory_mb": 10.2,
+          "cpu_ms": 20.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 4.375,
+          "throughput_mbs": 652.5,
+          "memory_mb": 67.1,
+          "cpu_ms": 510.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 9.916,
+          "throughput_mbs": 287.8,
+          "memory_mb": 58.5,
+          "cpu_ms": 165.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 23.322,
+          "throughput_mbs": 122.4,
+          "memory_mb": 11.4,
+          "cpu_ms": 185.0
+        }
+      ],
+      "100MB": [
+        {
+          "library": "quick-xml",
+          "time_ms": 71.04,
+          "throughput_mbs": 1467.9,
+          "memory_mb": 106.2,
+          "cpu_ms": 85.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 126.85,
+          "throughput_mbs": 822.0,
+          "memory_mb": 214.4,
+          "cpu_ms": 195.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 206.658,
+          "throughput_mbs": 504.6,
+          "memory_mb": 271.4,
+          "cpu_ms": 1000.0
+        },
+        {
+          "library": "Expat",
+          "time_ms": 222.738,
+          "throughput_mbs": 468.2,
+          "memory_mb": 213.8,
+          "cpu_ms": 290.0
+        },
+        {
+          "library": "Woodstox",
+          "time_ms": 260.906,
+          "throughput_mbs": 416.1,
+          "memory_mb": 299.3,
+          "cpu_ms": 1030.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 262.968,
+          "throughput_mbs": 396.5,
+          "memory_mb": 185.1,
+          "cpu_ms": 910.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 1184.17,
+          "throughput_mbs": 88.1,
+          "memory_mb": 165.7,
+          "cpu_ms": 1225.0
+        }
+      ],
+      "10MB": [
+        {
+          "library": "quick-xml",
+          "time_ms": 8.188,
+          "throughput_mbs": 3568.5,
+          "memory_mb": 31.0,
+          "cpu_ms": 30.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 16.657,
+          "throughput_mbs": 1754.1,
+          "memory_mb": 66.1,
+          "cpu_ms": 90.0
+        },
+        {
+          "library": "Woodstox",
+          "time_ms": 25.586,
+          "throughput_mbs": 413.2,
+          "memory_mb": 87.7,
+          "cpu_ms": 870.0
+        },
+        {
+          "library": "Expat",
+          "time_ms": 33.575,
+          "throughput_mbs": 870.2,
+          "memory_mb": 63.3,
+          "cpu_ms": 115.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 48.581,
+          "throughput_mbs": 601.4,
+          "memory_mb": 121.7,
+          "cpu_ms": 800.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 120.395,
+          "throughput_mbs": 242.7,
+          "memory_mb": 107.3,
+          "cpu_ms": 600.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 267.678,
+          "throughput_mbs": 109.2,
+          "memory_mb": 40.5,
+          "cpu_ms": 585.0
+        }
+      ],
+      "1KB": [
+        {
+          "library": "quick-xml",
+          "time_ms": 0.002,
+          "throughput_mbs": 659.3,
+          "memory_mb": 1.9,
+          "cpu_ms": 0.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 0.005,
+          "throughput_mbs": 197.8,
+          "memory_mb": 5.2,
+          "cpu_ms": 0.0
+        },
+        {
+          "library": "Expat",
+          "time_ms": 0.007,
+          "throughput_mbs": 152.1,
+          "memory_mb": 3.7,
+          "cpu_ms": 0.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 0.018,
+          "throughput_mbs": 56.5,
+          "memory_mb": 8.1,
+          "cpu_ms": 5.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 0.025,
+          "throughput_mbs": 39.6,
+          "memory_mb": 40.7,
+          "cpu_ms": 50.0
+        },
+        {
+          "library": "Woodstox",
+          "time_ms": 0.056,
+          "throughput_mbs": 17.7,
+          "memory_mb": 54.5,
+          "cpu_ms": 235.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 0.207,
+          "throughput_mbs": 4.8,
+          "memory_mb": 67.3,
+          "cpu_ms": 445.0
+        }
+      ],
+      "1MB": [
+        {
+          "library": "Woodstox",
+          "time_ms": 2.633,
+          "throughput_mbs": 390.7,
+          "memory_mb": 64.1,
+          "cpu_ms": 480.0
+        },
+        {
+          "library": "quick-xml",
+          "time_ms": 2.921,
+          "throughput_mbs": 8370.4,
+          "memory_mb": 26.3,
+          "cpu_ms": 15.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 4.473,
+          "throughput_mbs": 5465.2,
+          "memory_mb": 54.3,
+          "cpu_ms": 40.0
+        },
+        {
+          "library": "Expat",
+          "time_ms": 17.683,
+          "throughput_mbs": 1382.4,
+          "memory_mb": 53.4,
+          "cpu_ms": 65.0
+        },
+        {
+          "library": "Xerces",
+          "time_ms": 31.977,
+          "throughput_mbs": 764.5,
+          "memory_mb": 108.3,
+          "cpu_ms": 595.0
+        },
+        {
+          "library": "System.Xml",
+          "time_ms": 84.71,
+          "throughput_mbs": 288.6,
+          "memory_mb": 101.6,
+          "cpu_ms": 290.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 199.652,
+          "throughput_mbs": 122.4,
+          "memory_mb": 33.5,
+          "cpu_ms": 360.0
+        }
+      ],
+      "other": [
+        {
+          "library": "quick-xml",
+          "time_ms": 16.345,
+          "throughput_mbs": 611.8,
+          "memory_mb": 11.9,
+          "cpu_ms": 80.0
+        },
+        {
+          "library": "libxml2",
+          "time_ms": 30.137,
+          "throughput_mbs": 331.8,
+          "memory_mb": 31.9,
+          "cpu_ms": 155.0
+        },
+        {
+          "library": "Expat",
+          "time_ms": 43.879,
+          "throughput_mbs": 227.9,
+          "memory_mb": 24.9,
+          "cpu_ms": 220.0
+        },
+        {
+          "library": "encoding/xml",
+          "time_ms": 75.515,
+          "throughput_mbs": 132.4,
+          "memory_mb": 21.6,
+          "cpu_ms": 385.0
+        }
+      ]
+    }
+  },
+  "rankings": [
+    {
+      "library": "quick-xml",
+      "score": 93.0
+    },
+    {
+      "library": "pugixml",
+      "score": 64.2
+    },
+    {
+      "library": "Woodstox",
+      "score": 44.0
+    },
+    {
+      "library": "RapidXML",
+      "score": 41.9
+    },
+    {
+      "library": "libxml2",
+      "score": 32.5
+    },
+    {
+      "library": "VTD-XML",
+      "score": 30.5
+    },
+    {
+      "library": "Expat",
+      "score": 26.1
+    },
+    {
+      "library": "lxml",
+      "score": 21.6
+    },
+    {
+      "library": "roxmltree",
+      "score": 18.0
+    },
+    {
+      "library": "Xerces",
+      "score": 9.5
+    },
+    {
+      "library": "System.Xml",
+      "score": 8.2
+    },
+    {
+      "library": "encoding/xml",
+      "score": 6.9
+    },
+    {
+      "library": "cElementTree",
+      "score": 6.3
+    },
+    {
+      "library": "fast-xml-parser",
+      "score": 4.1
+    }
+  ]
+};
+
+
+
+// ===================================================================
+// RENDERING — all content is from trusted BENCHMARK_DATA, never user input
+// ===================================================================
+const D = BENCHMARK_DATA;
+let currentSize = "10MB";
+let currentOp = "DOM Parse";
+let sortCol = "time";
+let sortAsc = true;
+
+const langColors = {
+  cpp: "#5b7fff", java: "#ff3c6f", python: "#ffb340",
+  rust: "#ff6e40", csharp: "#b47eff", go: "#00d1b2", js: "#ffe040"
+};
+
+function libColor(name) {
+  const lib = D.libraries.find(l => l.name === name);
+  return lib ? langColors[lib.langClass] : "#888";
+}
+
+function libLang(name) {
+  const lib = D.libraries.find(l => l.name === name);
+  return lib ? lib.lang : "";
+}
+
+function libLangClass(name) {
+  const lib = D.libraries.find(l => l.name === name);
+  return lib ? lib.langClass : "";
+}
+
+function escapeText(s) {
+  const el = document.createElement("span");
+  el.textContent = s;
+  return el.innerHTML;
+}
+
+function renderStats() {
+  const allResults = Object.values(D.results).flatMap(op => Object.values(op).flat());
+  const strip = document.getElementById("stats-strip");
+  const langCount = new Set(D.libraries.map(l => l.lang)).size;
+  const topRanked = (D.rankings && D.rankings[0]) || { library: "N/A", score: 0 };
+
+  const cells = [
+    { label: "Libraries Tested", value: D.meta.lib_count, unit: "", detail: langCount + " languages" },
+    { label: "Operations", value: D.meta.op_count, unit: "", detail: "parse / stream / xpath / serialize" },
+    { label: "File Sizes", value: "5", unit: "", detail: "1KB to 100MB" },
+    { label: "Top Score", value: topRanked.score, unit: "/ 100", detail: topRanked.library },
+  ];
+
+  strip.replaceChildren();
+  cells.forEach(c => {
+    const cell = document.createElement("div");
+    cell.className = "stat-cell";
+
+    const lbl = document.createElement("div");
+    lbl.className = "stat-label";
+    lbl.textContent = c.label;
+
+    const val = document.createElement("div");
+    val.className = "stat-value";
+    val.textContent = c.value;
+    if (c.unit) {
+      const unitSpan = document.createElement("span");
+      unitSpan.className = "unit";
+      unitSpan.textContent = c.unit;
+      val.appendChild(unitSpan);
+    }
+
+    const det = document.createElement("div");
+    det.className = "stat-detail";
+    det.textContent = c.detail;
+
+    cell.append(lbl, val, det);
+    strip.appendChild(cell);
+  });
+}
+
+function renderHeaderMeta() {
+  const meta = document.getElementById("header-meta");
+  meta.replaceChildren();
+  const items = [
+    ["Generated", D.meta.date],
+    ["Runner", D.meta.runner],
+    ["Libraries", String(D.meta.lib_count)],
+    ["Operations", String(D.meta.op_count)],
+  ];
+  items.forEach(([label, value]) => {
+    const div = document.createElement("div");
+    div.className = "meta-item";
+    const strong = document.createElement("strong");
+    strong.textContent = label;
+    div.appendChild(strong);
+    div.append("\u00a0 " + value);
+    meta.appendChild(div);
+  });
+}
+
+function renderPodium() {
+  const rankings = D.rankings || [];
+  const top3 = rankings.slice(0, 3);
+  const podium = document.getElementById("podium");
+  podium.replaceChildren();
+
+  const order = [
+    { data: top3[1], cls: "podium-2nd", rank: 2 },
+    { data: top3[0], cls: "podium-1st", rank: 1 },
+    { data: top3[2], cls: "podium-3rd", rank: 3 },
+  ];
+
+  order.forEach(({ data, cls, rank }) => {
+    if (!data) return;
+    const slot = document.createElement("div");
+    slot.className = "podium-slot " + cls;
+
+    const nameEl = document.createElement("div");
+    nameEl.className = "podium-name";
+    nameEl.textContent = data.library + " ";
+    const badge = document.createElement("span");
+    badge.className = "lang-badge lang-" + libLangClass(data.library);
+    badge.textContent = libLang(data.library);
+    nameEl.appendChild(badge);
+
+    const speedEl = document.createElement("div");
+    speedEl.className = "podium-speed";
+    speedEl.textContent = "Score: " + data.score + " / 100";
+
+    const barEl = document.createElement("div");
+    barEl.className = "podium-bar";
+    barEl.textContent = rank;
+
+    slot.append(nameEl, speedEl, barEl);
+    podium.appendChild(slot);
+  });
+}
+
+function renderScoreExplainer() {
+  const el = document.getElementById("score-explainer");
+  el.replaceChildren();
+
+  const render = (tex, displayMode) => {
+    const span = document.createElement("span");
+    katex.render(tex, span, { displayMode, throwOnError: false });
+    return span;
+  };
+
+  // Intro
+  const p1 = document.createElement("p");
+  const s1 = document.createElement("strong");
+  s1.textContent = "How is the score calculated?";
+  p1.appendChild(s1);
+  p1.append(" For each operation and file size, we compute the relative speed of each library:");
+  el.appendChild(p1);
+
+  // Relative speed formula
+  const f1 = document.createElement("div");
+  f1.className = "formula";
+  f1.appendChild(render("r_{\\,i} = \\frac{t_{\\min}}{t_{\\,i}}", true));
+  el.appendChild(f1);
+
+  const p2 = document.createElement("p");
+  p2.append("where ");
+  p2.appendChild(render("r_i = 1", false));
+  p2.append(" means fastest, ");
+  p2.appendChild(render("r_i = 0.5", false));
+  p2.append(" means twice as slow. The final score is a weighted average:");
+  el.appendChild(p2);
+
+  // Score formula
+  const f2 = document.createElement("div");
+  f2.className = "formula";
+  f2.appendChild(render("\\text{score} = \\frac{\\displaystyle\\sum_{j} \\, r_{\\,j} \\;\\cdot\\; w_j}{\\displaystyle\\sum_{j} \\, w_j} \\;\\times\\; 100", true));
+  el.appendChild(f2);
+
+  // Weight formula
+  const p3 = document.createElement("p");
+  p3.append("where each weight combines operation importance and file size:");
+  el.appendChild(p3);
+
+  const f3 = document.createElement("div");
+  f3.className = "formula";
+  f3.appendChild(render("w_j = w_{\\text{op}} \\;\\cdot\\; \\log_2(\\text{file\\_size})", true));
+  el.appendChild(f3);
+
+  const p4 = document.createElement("p");
+  p4.append("Larger files weigh exponentially more (");
+  p4.appendChild(render("\\log_2", false));
+  p4.append(" scale) because real-world performance matters more than micro-benchmarks. Libraries are ");
+  const b = document.createElement("strong");
+  b.textContent = "not penalized";
+  p4.appendChild(b);
+  p4.append(" for unsupported operations.");
+  el.appendChild(p4);
+
+  // Weights table
+  const wDiv = document.createElement("div");
+  wDiv.className = "score-weights";
+  const weights = [
+    ["DOM Parse", "w_{\\text{op}} = 3"],
+    ["SAX/Stream", "w_{\\text{op}} = 2"],
+    ["XPath", "w_{\\text{op}} = 1.5"],
+    ["Serialize", "w_{\\text{op}} = 1"],
+  ];
+  weights.forEach(([name, tex]) => {
+    const s = document.createElement("span");
+    s.append(name + " ");
+    s.appendChild(render(tex, false));
+    wDiv.appendChild(s);
+  });
+  el.appendChild(wDiv);
+}
+
+function renderPills(containerId, items, activeItem, onClick) {
+  const container = document.getElementById(containerId);
+  container.replaceChildren();
+  items.forEach(item => {
+    const btn = document.createElement("button");
+    btn.className = "pill" + (item === activeItem ? " active" : "");
+    btn.textContent = item;
+    btn.addEventListener("click", () => onClick(item));
+    container.appendChild(btn);
+  });
+}
+
+function renderSizeFilters() {
+  renderPills("size-filters", D.sizes, currentSize, s => {
+    currentSize = s;
+    renderSizeFilters();
+    renderCharts();
+    renderTable();
+  });
+}
+
+function renderOpFilters() {
+  renderPills("op-filters", D.operations, currentOp, op => {
+    currentOp = op;
+    renderOpFilters();
+    renderCharts();
+    renderTable();
+  });
+}
+
+let charts = {};
+
+function renderCharts() {
+  const rows = D.results[currentOp]?.[currentSize] || [];
+  const labels = rows.map(r => r.library);
+  const colors = rows.map(r => libColor(r.library));
+  const colorsAlpha = colors.map(c => c + "cc");
+
+  const baseOpts = {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#111722ee',
+        titleFont: { family: "'DM Mono', monospace", size: 12 },
+        bodyFont: { family: "'DM Mono', monospace", size: 11 },
+        borderColor: '#1c2536',
+        borderWidth: 1,
+        padding: 10,
+        cornerRadius: 6,
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: '#1c253640' },
+        ticks: { color: '#4a5976', font: { family: "'DM Mono', monospace", size: 10 } },
+      },
+      y: {
+        grid: { display: false },
+        ticks: { color: '#7a8ba8', font: { family: "'Instrument Sans', sans-serif", size: 12, weight: 500 } },
+      }
+    },
+    animation: { duration: 600, easing: 'easeOutQuart' }
+  };
+
+  function makeDataset(data) {
+    return [{ data, backgroundColor: colorsAlpha, borderColor: colors, borderWidth: 1, borderRadius: 3, barPercentage: 0.7 }];
+  }
+
+  function makeChart(id, key, data, xTitle) {
+    if (charts[key]) charts[key].destroy();
+    charts[key] = new Chart(document.getElementById(id), {
+      type: 'bar',
+      data: { labels, datasets: makeDataset(data) },
+      options: {
+        ...baseOpts,
+        scales: {
+          ...baseOpts.scales,
+          x: { ...baseOpts.scales.x, title: { display: true, text: xTitle, color: '#4a5976', font: { family: "'DM Mono', monospace", size: 10 } } }
+        }
+      }
+    });
+  }
+
+  makeChart("chart-parse-time", "parseTime", rows.map(r => r.time_ms), "ms");
+  makeChart("chart-throughput", "throughput", rows.map(r => r.throughput_mbs), "MB/s");
+  makeChart("chart-memory", "memory", rows.map(r => r.memory_mb), "MB");
+  makeChart("chart-cpu", "cpu", rows.map(r => r.cpu_ms), "ms");
+}
+
+function renderTable() {
+  const rows = D.results[currentOp]?.[currentSize] || [];
+  const sortKey = { rank: "time_ms", library: "library", language: "library", time: "time_ms", throughput: "throughput_mbs", memory: "memory_mb", cpu: "cpu_ms" }[sortCol] || "time_ms";
+
+  const sorted = [...rows].sort((a, b) => {
+    if (sortKey === "library") return sortAsc ? a[sortKey].localeCompare(b[sortKey]) : b[sortKey].localeCompare(a[sortKey]);
+    return sortAsc ? a[sortKey] - b[sortKey] : b[sortKey] - a[sortKey];
+  });
+
+  const maxTime = Math.max(...sorted.map(r => r.time_ms));
+  const tbody = document.getElementById("results-body");
+  tbody.replaceChildren();
+
+  sorted.forEach((r, i) => {
+    const rank = i + 1;
+    const tr = document.createElement("tr");
+    const pct = (r.time_ms / maxTime * 100).toFixed(0);
+
+    // Rank cell
+    const tdRank = document.createElement("td");
+    if (rank <= 3) {
+      const medal = document.createElement("span");
+      medal.className = "rank-medal rank-" + rank;
+      medal.textContent = rank;
+      tdRank.appendChild(medal);
+    } else {
+      tdRank.textContent = rank;
+    }
+
+    // Library cell
+    const tdLib = document.createElement("td");
+    tdLib.textContent = r.library + " ";
+    const badge = document.createElement("span");
+    badge.className = "lang-badge lang-" + libLangClass(r.library);
+    badge.textContent = libLang(r.library);
+    tdLib.appendChild(badge);
+
+    // Language cell
+    const tdLang = document.createElement("td");
+    tdLang.textContent = libLang(r.library);
+
+    // Time cell with bar
+    const tdTime = document.createElement("td");
+    tdTime.className = "bar-cell";
+    const bar = document.createElement("span");
+    bar.className = "bar-bg";
+    bar.style.width = pct + "%";
+    bar.style.background = libColor(r.library);
+    const val = document.createElement("span");
+    val.className = "bar-value";
+    val.textContent = r.time_ms.toFixed(3);
+    tdTime.append(bar, val);
+
+    // Throughput
+    const tdTp = document.createElement("td");
+    tdTp.textContent = r.throughput_mbs.toLocaleString() + " MB/s";
+
+    // Memory
+    const tdMem = document.createElement("td");
+    tdMem.textContent = r.memory_mb;
+
+    // CPU
+    const tdCpu = document.createElement("td");
+    tdCpu.textContent = r.cpu_ms.toFixed(3);
+
+    tr.append(tdRank, tdLib, tdLang, tdTime, tdTp, tdMem, tdCpu);
+    tbody.appendChild(tr);
+  });
+
+  document.querySelectorAll("#results-table thead th").forEach(th => {
+    th.classList.remove("sorted-asc", "sorted-desc");
+    if (th.dataset.sort === sortCol) {
+      th.classList.add(sortAsc ? "sorted-asc" : "sorted-desc");
+    }
+  });
+}
+
+document.querySelectorAll("#results-table thead th").forEach(th => {
+  th.addEventListener("click", () => {
+    const col = th.dataset.sort;
+    if (sortCol === col) { sortAsc = !sortAsc; }
+    else { sortCol = col; sortAsc = col === "library" || col === "language"; }
+    renderTable();
+  });
+});
+
+renderHeaderMeta();
+renderStats();
+renderPodium();
+// KaTeX is deferred — render formulas once it's loaded
+if (typeof katex !== "undefined") renderScoreExplainer();
+else document.querySelector('script[src*="katex"]').addEventListener("load", renderScoreExplainer);
+renderSizeFilters();
+renderOpFilters();
+renderCharts();
+renderTable();
+</script>
+
+</body>
+</html>
